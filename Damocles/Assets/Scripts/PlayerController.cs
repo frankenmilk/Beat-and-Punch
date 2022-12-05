@@ -9,12 +9,12 @@ public class PlayerController : MonoBehaviour
 
     private bool grounded;
 
-    private float speed = 10;
-    float jumpHeight = 4;
+    [SerializeField] float speed;
+    [SerializeField] float jumpHeight;
 
-    float walkAcceleration = 75;
-    float airAcceleration = 30;
-    float groundDeceleration = 70;
+    [SerializeField] float walkAcceleration; // was 75
+    [SerializeField] float airAcceleration; // was 30
+    [SerializeField] float groundDeceleration; // was 70
 
 
 
@@ -30,7 +30,8 @@ public class PlayerController : MonoBehaviour
         transform.Translate(velocity * Time.deltaTime);
         float horiMoveInput = Input.GetAxisRaw("Horizontal");
 
-        if (grounded)
+        // The jump code, checks if you are grounded then uses the jump button (space) to go up
+        if (grounded) 
         {
             velocity.y = 0;
 
