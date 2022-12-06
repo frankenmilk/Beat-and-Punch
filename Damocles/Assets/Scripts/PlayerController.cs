@@ -12,9 +12,17 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float speed;
     [SerializeField] float jumpHeight;
 
+    // Acceleration stuff
     [SerializeField] float walkAcceleration; // was 75
     [SerializeField] float airAcceleration; // was 30
     [SerializeField] float groundDeceleration; // was 70
+
+
+    // Gameplay Things //
+
+    // Wall Jump
+
+    // Double Jump
 
 
 
