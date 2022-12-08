@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private BoxCollider2D boxCollider;
-    private Vector2 velocity;
+    Rigidbody2D playerBody;
 
+    public bool touchingWall;
     private bool grounded;
+
+    // Reminder: Use boxes to check if the player is touching a wall, if yes= allow for another jump
+
+    // Other code
+    private BoxCollider2D playerCollider;
+    private Vector2 velocity;
 
     [SerializeField] float speed;
     [SerializeField] float jumpHeight;
@@ -29,17 +35,47 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        boxCollider = GetComponent<BoxCollider2D>();
+        playerCollider = GetComponent<BoxCollider2D>();
+        playerBody = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        GetInput();
+
+        // Collider stuff (very cool, just don't look at it)
+        Collider2D[] hits = Physics2D.OverlapBoxAll(transform.position, playerCollider.size, 0);
+        grounded = false;
+
+        foreach (Collider2D hit in hits)
+        {
+            if (hit == playerCollider)
+                continue;
+
+            ColliderDistance2D colliderDistance = hit.Distance(playerCollider);
+
+            if (colliderDistance.isOverlapped)
+            {
+                transform.Translate(colliderDistance.pointA - colliderDistance.pointB);
+
+                if (Vector2.Angle(colliderDistance.normal, Vector2.up) < 90 && velocity.y < 0)
+                {
+                    grounded = true;
+                }
+            }
+        }
+    }
+
+    // Is the actual movement stuff
+    void GetInput()
+    {
+
         transform.Translate(velocity * Time.deltaTime);
         float horiMoveInput = Input.GetAxisRaw("Horizontal");
 
         // The jump code, checks if you are grounded then uses the jump button (space) to go up
-        if (grounded) 
+        if (grounded)
         {
             velocity.y = 0;
 
@@ -61,28 +97,5 @@ public class PlayerController : MonoBehaviour
         {
             velocity.x = Mathf.MoveTowards(velocity.x, 0, groundDeceleration * Time.deltaTime);
         }
-
-        // Collider stuff (very cool, just don't look at it)
-        Collider2D[] hits = Physics2D.OverlapBoxAll(transform.position, boxCollider.size, 0);
-        grounded = false;
-
-        foreach (Collider2D hit in hits)
-        {
-            if (hit == boxCollider)
-                continue;
-
-            ColliderDistance2D colliderDistance = hit.Distance(boxCollider);
-
-            if (colliderDistance.isOverlapped)
-            {
-                transform.Translate(colliderDistance.pointA - colliderDistance.pointB);
-
-                if (Vector2.Angle(colliderDistance.normal, Vector2.up) < 90 && velocity.y < 0)
-                {
-                    grounded = true;
-                }
-            }
-        }
-
     }
 }
