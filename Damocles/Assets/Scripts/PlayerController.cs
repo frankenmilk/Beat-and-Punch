@@ -6,10 +6,12 @@ public class PlayerController : MonoBehaviour
 {
     Rigidbody2D playerBody;
 
-    public bool touchingWall;
+    private bool touchingWall;
     private bool grounded;
 
-    // Reminder: Use boxes to check if the player is touching a wall, if yes= allow for another jump
+    [SerializeField] private LayerMask floorLayerMask;
+    [SerializeField] private LayerMask wallLayerMask;
+
 
     // Other code
     private BoxCollider2D playerCollider;
@@ -42,9 +44,9 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+   
         GetInput();
 
-        // Collider stuff (very cool, just don't look at it)
         Collider2D[] hits = Physics2D.OverlapBoxAll(transform.position, playerCollider.size, 0);
         grounded = false;
 
@@ -65,6 +67,26 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+    }
+
+    bool CanJump()
+    {
+        float extraHeightTest = .01f;
+        RaycastHit2D bottomRay = Physics2D.Raycast(playerCollider.bounds.center, Vector2.down, playerCollider.bounds.extents.y + extraHeightTest, floorLayerMask);
+        Color rayColor;
+        if (bottomRay.collider != null)
+        {
+            rayColor = Color.green;
+        }
+        else
+        {
+            rayColor = Color.red;
+            Debug.Log("is not on ground");
+        }
+
+        Debug.DrawRay(playerCollider.bounds.center, Vector2.down * (playerCollider.bounds.extents.y + extraHeightTest));
+
+        return bottomRay.collider != null;
     }
 
     // Is the actual movement stuff

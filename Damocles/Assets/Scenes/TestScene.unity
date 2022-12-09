@@ -138,7 +138,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &364338226
 Transform:
   m_ObjectHideFlags: 0
@@ -168,7 +168,7 @@ GameObject:
   - component: {fileID: 381407647}
   - component: {fileID: 381407646}
   - component: {fileID: 381407645}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wall
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -640,9 +640,9 @@ GameObject:
   - component: {fileID: 1216723595}
   - component: {fileID: 1216723594}
   - component: {fileID: 1216723597}
-  - component: {fileID: 1216723599}
   - component: {fileID: 1216723598}
-  m_Layer: 0
+  - component: {fileID: 1216723599}
+  m_Layer: 6
   m_Name: Floor
   m_TagString: Floor
   m_Icon: {fileID: 0}
@@ -1040,12 +1040,12 @@ CompositeCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_GeometryType: 0
-  m_GenerationType: 1
+  m_GenerationType: 0
   m_EdgeRadius: 0
   m_ColliderPaths: []
   m_CompositePaths:
     m_Paths: []
-  m_VertexDistance: 1
+  m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
   m_UseDelaunayMesh: 0
 --- !u!1 &1706573983
@@ -1080,7 +1080,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e95b914fecb0cdd49b867b7ece849ab4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  touchingWall: 0
+  floorLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  wallLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
   speed: 10
   jumpHeight: 2
   walkAcceleration: 75
