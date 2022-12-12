@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
 
     // Other code
     private BoxCollider2D playerCollider;
+    [SerializeField] BoxCollider2D leftWallCollider;
+    [SerializeField] BoxCollider2D rightWallCollider;
     private Vector2 velocity;
 
     [SerializeField] float speed;
@@ -47,6 +49,7 @@ public class PlayerController : MonoBehaviour
    
         GetInput();
 
+
         Collider2D[] hits = Physics2D.OverlapBoxAll(transform.position, playerCollider.size, 0);
         grounded = false;
 
@@ -67,16 +70,19 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+
     }
 
     bool CanJump()
     {
-        float extraHeightTest = .01f;
+        grounded = false;
+        float extraHeightTest = .1f;
         RaycastHit2D bottomRay = Physics2D.Raycast(playerCollider.bounds.center, Vector2.down, playerCollider.bounds.extents.y + extraHeightTest, floorLayerMask);
         Color rayColor;
         if (bottomRay.collider != null)
         {
             rayColor = Color.green;
+            grounded = true;
         }
         else
         {
@@ -88,6 +94,7 @@ public class PlayerController : MonoBehaviour
 
         return bottomRay.collider != null;
     }
+    
 
     // Is the actual movement stuff
     void GetInput()
