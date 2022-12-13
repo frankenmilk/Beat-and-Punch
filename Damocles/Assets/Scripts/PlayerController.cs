@@ -15,8 +15,8 @@ public class PlayerController : MonoBehaviour
 
     // Other code
     private BoxCollider2D playerCollider;
-    [SerializeField] BoxCollider2D leftWallCollider;
-    [SerializeField] BoxCollider2D rightWallCollider;
+    [SerializeField] Collider2D wallCollider;
+    [SerializeField] Collider2D floorCollider;
     private Vector2 velocity;
 
     [SerializeField] float speed;
@@ -49,12 +49,35 @@ public class PlayerController : MonoBehaviour
    
         GetInput();
 
+        Collider2D[] floorHits = Physics2D.OverlapBoxAll(transform.position, playerCollider.size, 0, floorLayerMask);
+        Collider2D[] wallHits = Physics2D.OverlapBoxAll(transform.position, playerCollider.size, 0, wallLayerMask);
 
-        Collider2D[] hits = Physics2D.OverlapBoxAll(transform.position, playerCollider.size, 0);
         grounded = false;
 
-        foreach (Collider2D hit in hits)
+        foreach (Collider2D hit in wallHits)
         {
+            Debug.Log(hit);
+
+            if (hit == playerCollider)
+                continue;
+
+            ColliderDistance2D colliderDistance = hit.Distance(playerCollider);
+
+            if (colliderDistance.isOverlapped)
+            {
+                transform.Translate(colliderDistance.pointA - colliderDistance.pointB);
+
+                if (Vector2.Angle(colliderDistance.normal, Vector2.up) < 90 && velocity.y < 0)
+                {
+                    grounded = true;
+                }
+            }
+        }
+
+        foreach (Collider2D hit in floorHits)
+        {
+            Debug.Log(hit);
+
             if (hit == playerCollider)
                 continue;
 
@@ -76,7 +99,7 @@ public class PlayerController : MonoBehaviour
     bool CanJump()
     {
         grounded = false;
-        float extraHeightTest = .1f;
+        float extraHeightTest = .01f;
         RaycastHit2D bottomRay = Physics2D.Raycast(playerCollider.bounds.center, Vector2.down, playerCollider.bounds.extents.y + extraHeightTest, floorLayerMask);
         Color rayColor;
         if (bottomRay.collider != null)
