@@ -13,7 +13,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask wallLayerMask;
 
 
-    // Other code
     private BoxCollider2D playerCollider;
     [SerializeField] Collider2D wallCollider;
     [SerializeField] Collider2D floorCollider;
@@ -31,6 +30,9 @@ public class PlayerController : MonoBehaviour
     // Gameplay Things //
 
     // Wall Jump
+
+    bool isOnWall;
+    [SerializeField] float wallKick;
 
     // Double Jump
 
@@ -53,10 +55,10 @@ public class PlayerController : MonoBehaviour
         Collider2D[] wallHits = Physics2D.OverlapBoxAll(transform.position, playerCollider.size, 0, wallLayerMask);
 
         grounded = false;
+        isOnWall = false;
 
         foreach (Collider2D hit in wallHits)
         {
-            Debug.Log(hit);
 
             if (hit == playerCollider)
                 continue;
@@ -66,17 +68,12 @@ public class PlayerController : MonoBehaviour
             if (colliderDistance.isOverlapped)
             {
                 transform.Translate(colliderDistance.pointA - colliderDistance.pointB);
-
-                if (Vector2.Angle(colliderDistance.normal, Vector2.up) < 90 && velocity.y < 0)
-                {
-                    grounded = true;
-                }
+                WallJump();
             }
         }
 
         foreach (Collider2D hit in floorHits)
         {
-            Debug.Log(hit);
 
             if (hit == playerCollider)
                 continue;
@@ -90,32 +87,26 @@ public class PlayerController : MonoBehaviour
                 if (Vector2.Angle(colliderDistance.normal, Vector2.up) < 90 && velocity.y < 0)
                 {
                     grounded = true;
+                    isOnWall = false;
                 }
             }
         }
 
     }
 
-    bool CanJump()
+    void WallJump()
     {
-        grounded = false;
-        float extraHeightTest = .01f;
-        RaycastHit2D bottomRay = Physics2D.Raycast(playerCollider.bounds.center, Vector2.down, playerCollider.bounds.extents.y + extraHeightTest, floorLayerMask);
-        Color rayColor;
-        if (bottomRay.collider != null)
+        isOnWall = true;
+        velocity.y = 0;
+
+        // This jump should push you away from the wall and up
+        if (Input.GetButtonDown("Jump"))
         {
-            rayColor = Color.green;
-            grounded = true;
-        }
-        else
-        {
-            rayColor = Color.red;
-            Debug.Log("is not on ground");
+            // Calculate the velocity required to achieve the target jump height.
+            velocity.y = Mathf.Sqrt(2 * jumpHeight * Mathf.Abs(Physics2D.gravity.y));
+            velocity.x = 
         }
 
-        Debug.DrawRay(playerCollider.bounds.center, Vector2.down * (playerCollider.bounds.extents.y + extraHeightTest));
-
-        return bottomRay.collider != null;
     }
     
 
@@ -138,7 +129,11 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        velocity.y += Physics2D.gravity.y * Time.deltaTime;
+        if (isOnWall == false || grounded == false && isOnWall == false)
+        {
+            velocity.y += Physics2D.gravity.y * Time.deltaTime;
+        }
+        
 
 
         if (horiMoveInput != 0)

@@ -1062,6 +1062,7 @@ MonoBehaviour:
   walkAcceleration: 75
   airAcceleration: 30
   groundDeceleration: 70
+  wallKick: 10
 --- !u!212 &1706573985
 SpriteRenderer:
   m_ObjectHideFlags: 0
