@@ -1027,6 +1027,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1706573986}
   - component: {fileID: 1706573985}
+  - component: {fileID: 1706573989}
   - component: {fileID: 1706573984}
   - component: {fileID: 1706573987}
   - component: {fileID: 1706573988}
@@ -1044,7 +1045,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1706573983}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e95b914fecb0cdd49b867b7ece849ab4, type: 3}
   m_Name: 
@@ -1177,6 +1178,23 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &1706573989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1706573983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9a7654f4d7cf674c91249c897f75666, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
+  jumpHeight: 2
+  walkAcceleration: 75
+  airAcceleration: 30
+  groundDeceleration: 70
 --- !u!1 &1794280358
 GameObject:
   m_ObjectHideFlags: 0

@@ -18,6 +18,7 @@ public class PlayerController2 : MonoBehaviour
 
     public float speed;
     public float jumpHeight;
+    private Vector2 velocity;
 
     public bool allowedToJump;
     public bool touchingWall;
@@ -49,14 +50,14 @@ public class PlayerController2 : MonoBehaviour
         Debug.DrawRay(new Vector2(rightPositionX + transform.position.x, this.transform.position.y), new Vector2(rightPositionX + 0.2f, 0.0f), Color.black);
 
         //Debug.Log(leftHit.collider.tag);
-        if (landingHit.collider.tag == "floor")
+        if (landingHit.collider.tag == "Floor")
         {
             allowedToJump = true;
             Debug.Log("Hit the floor");
         }
         if (topHit.collider != null)
         {
-            if (topHit.collider.tag == "floor")
+            if (topHit.collider.tag == "Floor")
             {
                 allowedToJump = false;
                 Debug.Log("Hit the top");
@@ -64,7 +65,7 @@ public class PlayerController2 : MonoBehaviour
         }
         if (leftHit.collider != null)
         {
-            if (leftHit.collider.tag == "wall")
+            if (leftHit.collider.tag == "Fall")
             {
 
                 touchingWall = true;
@@ -75,7 +76,7 @@ public class PlayerController2 : MonoBehaviour
 
         if (rightHit.collider != null)
         {
-            if (rightHit.collider.tag == "wall")
+            if (rightHit.collider.tag == "Wall")
             {
                 touchingWall = true;
             }
@@ -124,4 +125,6 @@ public class PlayerController2 : MonoBehaviour
             allowedToJump = false;
         }
     }
+
+    
 }
