@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class PlayerController3 : MonoBehaviour
 {
+    Rigidbody2D playerBody;
+    BoxCollider2D playerCollider;
+
+    // Set layermasks in inspector
+    [SerializeField] private LayerMask floorLayerMask;
+    [SerializeField] private LayerMask wallLayerMask;
+
     private bool touchingWall;
     private bool grounded;
 
@@ -32,7 +39,8 @@ public class PlayerController3 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        playerCollider = GetComponent<BoxCollider2D>();
+        playerBody = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -41,22 +49,25 @@ public class PlayerController3 : MonoBehaviour
 
         GetInput();
 
-        landingHit = Physics2D.Raycast(new Vector2(this.transform.position.x, bottomPositionY + transform.position.y), new Vector2(transform.position.x, 0.2f));
+        landingHit = Physics2D.Raycast(transform.position, Vector2.down, .01f, floorLayerMask);
         leftHit = Physics2D.Raycast(new Vector2(leftPositionX + transform.position.x, this.transform.position.y), new Vector2(leftPositionX - 0.2f, 0.0f), 0.2f);
         rightHit = Physics2D.Raycast(new Vector2(rightPositionX + transform.position.x, this.transform.position.y), new Vector2(rightPositionX + 0.2f, 0.0f), 0.2f);
         topHit = Physics2D.Raycast(new Vector2(this.transform.position.x, topPositionY + transform.position.y), new Vector2(transform.position.x, 0.2f), 0.2f);
 
-        Debug.DrawRay(new Vector2(rightPositionX + transform.position.x, this.transform.position.y), new Vector2(rightPositionX + 0.2f, 0.0f), Color.black);
 
         //Debug.Log(leftHit.collider.tag);
-        if (landingHit.collider.tag == "Floor")
+        if (landingHit.collider != null)
         {
-            grounded = true;
-            Debug.Log("Hit the floor");
+            if (landingHit.collider.tag == "floor")
+            {
+                grounded = true;
+                Debug.Log(landingHit.collider.name);
+            }
         }
+        
         if (topHit.collider != null)
         {
-            if (topHit.collider.tag == "Floor")
+            if (topHit.collider.tag == "floor")
             {
                 grounded = false;
                 Debug.Log("Hit the top");
@@ -64,7 +75,7 @@ public class PlayerController3 : MonoBehaviour
         }
         if (leftHit.collider != null)
         {
-            if (leftHit.collider.tag == "Wall")
+            if (leftHit.collider.tag == "wall")
             {
 
                 touchingWall = true;
@@ -75,7 +86,7 @@ public class PlayerController3 : MonoBehaviour
 
         if (rightHit.collider != null)
         {
-            if (rightHit.collider.tag == "Wall")
+            if (rightHit.collider.tag == "wall")
             {
                 touchingWall = true;
             }
@@ -96,10 +107,12 @@ public class PlayerController3 : MonoBehaviour
 
 
 
-           Debug.DrawRay(new Vector2(this.transform.position.x, bottomPositionY + transform.position.y), new Vector2(0, -0.5f), Color.red);
+           Debug.DrawRay(transform.position, Vector2.down, Color.red);
+        /*
            Debug.DrawRay(new Vector2(this.transform.position.x, topPositionY + transform.position.y), new Vector2(0, 0.2f), Color.red);
            Debug.DrawRay(new Vector2(leftPositionX + transform.position.x, this.transform.position.y), new Vector2(leftPositionX - 0.2f, 0), Color.red);
            Debug.DrawRay(new Vector2(rightPositionX + transform.position.x, this.transform.position.y), new Vector2(0.2f, 0), Color.red);
+        */
 
     }
 
@@ -121,10 +134,7 @@ public class PlayerController3 : MonoBehaviour
             }
         }
 
-        if (touchingWall == false || grounded == false && touchingWall == false)
-        {
-            velocity.y += Physics2D.gravity.y * Time.deltaTime;
-        }
+        
 
 
 
