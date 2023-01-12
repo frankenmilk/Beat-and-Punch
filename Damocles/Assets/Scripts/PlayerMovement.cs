@@ -105,7 +105,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonDown("Jump") && wallJumpingCounter > 0f)
         {
             isWallJumping = true;
-            rb.velocity = new Vector2(wallJumpingDirection * wallJumpingPower.x, wallJumpingPower.y);
+            rb.velocity = new Vector2(wallJumpingDirection * wallJumpingPower.x / 2, wallJumpingPower.y / 2);
             wallJumpingCounter = 0f;
             
             if(transform.localScale.x != wallJumpingDirection)
