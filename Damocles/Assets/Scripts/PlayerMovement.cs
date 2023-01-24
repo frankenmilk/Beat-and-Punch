@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public Animator animator;
     // For movement
     private float horizontal;
     [SerializeField] private float speed = 16f;
@@ -34,6 +35,9 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Update()
     {
+
+        animator.SetFloat("Speed", Mathf.Abs(horizontal));
+
         horizontal = Input.GetAxisRaw("Horizontal");
 
         if (Input.GetButtonDown("Jump") && IsGrounded())
@@ -43,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
         {
+            animator.SetBool("IsJumping", true);
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
         }
 
