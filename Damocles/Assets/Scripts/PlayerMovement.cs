@@ -35,6 +35,10 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Update()
     {
+        if (IsGrounded())
+        {
+            animator.SetBool("IsJumping", false);
+        }
 
         animator.SetFloat("Speed", Mathf.Abs(horizontal));
 
@@ -42,12 +46,12 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && IsGrounded())
         {
+            animator.SetBool("IsJumping", true);
             rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
         }
 
         if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
         {
-            animator.SetBool("IsJumping", true);
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
         }
 
