@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public Animator animator;
+
     // For movement
     private float horizontal;
     [SerializeField] private float speed = 16f;
@@ -35,7 +36,9 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Update()
     {
-        if (IsGrounded())
+
+        
+        if ()
         {
             animator.SetBool("IsJumping", false);
         }
@@ -71,6 +74,11 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
         }
         
+    }
+
+    private float Timer()
+    {
+        return Time.deltaTime;
     }
 
     private bool IsGrounded()
