@@ -6,6 +6,8 @@ public class PlayerMovement : MonoBehaviour
 {
     public Animator animator;
 
+    private float Yvelocity;
+
     // For movement
     private float horizontal;
     [SerializeField] private float speed = 16f;
@@ -36,14 +38,14 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Update()
     {
-
-        
-        if ()
+        if (rb.velocity.y < .01 && !IsWalled())
         {
             animator.SetBool("IsJumping", false);
         }
 
         animator.SetFloat("Speed", Mathf.Abs(horizontal));
+
+        animator.SetFloat("Yvelocity", Mathf.Abs(rb.velocity.y));
 
         horizontal = Input.GetAxisRaw("Horizontal");
 
