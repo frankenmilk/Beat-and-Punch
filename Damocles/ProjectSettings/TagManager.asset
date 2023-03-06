@@ -6,6 +6,7 @@ TagManager:
   tags:
   - floor
   - wall
+  - Invis Wall
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - player
   - foreground tree
   - background tree
-  - 
+  - enemy
   - 
   - 
   - 
