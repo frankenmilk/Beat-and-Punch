@@ -10,16 +10,24 @@ public class PlayerCombat : MonoBehaviour
     public Transform attackPoint;
 
     public float attackRange = 0.5f;
-    public int attackDamage = 25;
+    public int attackDamage;
+
+    public float attackRate = .5f;
+    private float nextAttackTime = 0f;
 
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if(Time.time >= nextAttackTime)
         {
-            Attack();
-        }
+            if (Input.GetMouseButtonDown(0))
+            {
+                Attack();
+                nextAttackTime = Time.time + 1.0f / attackRate;
+            }
+        } 
+        
     }
 
     void Attack()
@@ -33,7 +41,7 @@ public class PlayerCombat : MonoBehaviour
         // Damage them
         foreach(Collider2D enemy in hitEnemies)
         {
-            enemy.GetComponent<enemy>().TakeDmaage(attackDamage);
+            enemy.GetComponent<enemy>().TakeDamage(attackDamage);
         }
     }
 
