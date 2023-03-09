@@ -36,7 +36,6 @@ public class Patrol : MonoBehaviour
     {
         if (collision.gameObject.tag == "Invis Wall")
         {
-            Debug.Log("entered");
             transform.localScale = new Vector2(-(Mathf.Sign(Rigidbody.velocity.x)), transform.localScale.y);
         }
         

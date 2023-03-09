@@ -26898,9 +26898,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2048
   attackPoint: {fileID: 674208053}
-  attackRange: 0.78
+  attackRange: 0.8
   attackDamage: 25
-  attackTime: 0
+  attackRate: 0.5
+  time: 0
+  timer: 0
 --- !u!1 &1746732501
 GameObject:
   m_ObjectHideFlags: 0
