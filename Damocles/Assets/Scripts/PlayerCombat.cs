@@ -20,13 +20,22 @@ public class PlayerCombat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (combo == 2)
+        {
+            attackDamage = 50;
+        }
+        else
+        {
+            attackDamage = 25;
+        }
         // Base attack
         if (Time.time >= nextAttackTime)
         {
             if (Input.GetMouseButtonDown(0))
             {
                 Attack();
-                nextAttackTime = Time.time + 5f;
+                nextAttackTime = Time.time + 1.5f;
                 timeAtAttack = Time.time;
 
             }
