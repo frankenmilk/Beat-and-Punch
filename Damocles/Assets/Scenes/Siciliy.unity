@@ -26715,7 +26715,7 @@ GameObject:
   - component: {fileID: 1706573992}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26900,9 +26900,8 @@ MonoBehaviour:
   attackPoint: {fileID: 674208053}
   attackRange: 0.8
   attackDamage: 25
+  combo: 0
   attackRate: 0.5
-  time: 0
-  timer: 0
 --- !u!1 &1746732501
 GameObject:
   m_ObjectHideFlags: 0
@@ -27086,6 +27085,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 1746732502}
   maxHealth: 100
+  rb: {fileID: 1746732507}
+  knockBackForce: 10000
+  knockBackForceUp: 1
 --- !u!1 &1781993392
 GameObject:
   m_ObjectHideFlags: 0
