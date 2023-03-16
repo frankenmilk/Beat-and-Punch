@@ -27086,8 +27086,8 @@ MonoBehaviour:
   animator: {fileID: 1746732502}
   maxHealth: 100
   rb: {fileID: 1746732507}
-  knockBackForce: 10000
-  knockBackForceUp: 1
+  knockBackForce: 1.2
+  knockBackForceUp: 0
 --- !u!1 &1781993392
 GameObject:
   m_ObjectHideFlags: 0

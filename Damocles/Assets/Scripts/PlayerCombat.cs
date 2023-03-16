@@ -35,7 +35,7 @@ public class PlayerCombat : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 Attack();
-                nextAttackTime = Time.time + 1.5f;
+                nextAttackTime = Time.time + 1f;
                 timeAtAttack = Time.time;
 
             }

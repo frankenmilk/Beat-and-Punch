@@ -13,14 +13,35 @@ public class enemy : MonoBehaviour
     [SerializeField] float knockBackForce;
     [SerializeField] float knockBackForceUp;
 
+    private bool takingDamage;
+    private float timeTime;
+
     // Start is called before the first frame update
     void Start()
     {
         currentHealth = maxHealth;
     }
+    void Update()
+    {
+        if (takingDamage == true)
+        {
+            GetComponent<Patrol>().enabled = false;
+        }
+        else if (takingDamage == false)
+        {
+            GetComponent<Patrol>().enabled = true;
+        }
+
+        if (Time.time >= timeTime + 1f)
+        {
+            takingDamage = false;
+        }
+    }
 
     public void TakeDamage(int damage)
     {
+        takingDamage = true;
+        timeTime = Time.time;
         Knockback();
 
         currentHealth -= damage;
