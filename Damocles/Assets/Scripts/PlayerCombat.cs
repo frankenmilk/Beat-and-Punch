@@ -17,9 +17,23 @@ public class PlayerCombat : MonoBehaviour
     private float timeAtAttack;
     private float nextAttackTime = 0f;
 
+    public ProjectileBehaviour ProjectilePrefab;
+    public Transform LaunchOffset;
+    private Quaternion arrowRotation;
+
+    [SerializeField] Rigidbody2D rb;
+
     // Update is called once per frame
     void Update()
     {
+        if (transform.localScale.x == -1f)
+        {
+            arrowRotation.Set(0, 180, 0, 0);
+        }
+        else if (transform.localScale.x == 1f)
+        {
+            arrowRotation.Set(0, 0, 0, 0);
+        }
 
         if (combo == 2)
         {
@@ -49,7 +63,13 @@ public class PlayerCombat : MonoBehaviour
                 Attack();
             }
         }
-        
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            Vector3 localScale = transform.localScale;
+            Instantiate(ProjectilePrefab, LaunchOffset.position, arrowRotation);
+        }
+
     }
 
     void Attack()
