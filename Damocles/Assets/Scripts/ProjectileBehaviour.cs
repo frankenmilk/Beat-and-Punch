@@ -5,7 +5,7 @@ using UnityEngine;
 public class ProjectileBehaviour : MonoBehaviour
 {
     public float shotSpeed;
-    private int arrowDamage;
+    public int arrowDamage = 10;
 
     // Update is called once per frame
     void Update()
@@ -13,14 +13,13 @@ public class ProjectileBehaviour : MonoBehaviour
         transform.position += transform.right * Time.deltaTime * shotSpeed;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D hitInfo)
     {
-        Destroy(gameObject);
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-
+        enemy enemy = hitInfo.GetComponent<enemy>();
+        if (enemy != null)
+        {
+            enemy.TakeDamage(arrowDamage);
+        }
         Destroy(gameObject);
     }
 }

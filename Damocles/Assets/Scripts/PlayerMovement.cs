@@ -137,9 +137,7 @@ public class PlayerMovement : MonoBehaviour
             if(transform.localScale.x != wallJumpingDirection)
             {
                 isFacingRight = !isFacingRight;
-                Vector3 localScale = transform.localScale; ;
-                localScale.x *= -1f;
-                transform.localScale = localScale;
+                transform.Rotate(0, 180, 0);
             }
 
             Invoke(nameof(StopWallJumping), wallJumpingDuration);
@@ -156,9 +154,7 @@ public class PlayerMovement : MonoBehaviour
         if(isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f)
         {
             isFacingRight = !isFacingRight;
-            Vector3 localScale = transform.localScale;
-            localScale.x *= -1f;
-            transform.localScale = localScale;
+            transform.Rotate(0, 180, 0);
         }
     }
 

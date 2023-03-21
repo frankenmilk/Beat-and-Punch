@@ -10,7 +10,7 @@ public class PlayerCombat : MonoBehaviour
     public Transform attackPoint;
 
     public float attackRange = 0.5f;
-    public int attackDamage;
+    public int attackDamage = 25;
     [SerializeField] int combo = 0;
 
     public float attackRate = .2f; // maybe became useless ----> it became useless but I'll keep here just in case
@@ -19,20 +19,22 @@ public class PlayerCombat : MonoBehaviour
 
     public ProjectileBehaviour ProjectilePrefab;
     public Transform LaunchOffset;
-    private Quaternion arrowRotation;
+
+    public bool arrowHit = false;
 
     [SerializeField] Rigidbody2D rb;
 
     // Update is called once per frame
     void Update()
     {
-        if (transform.localScale.x == -1f)
+
+        if (arrowHit == true)
         {
-            arrowRotation.Set(0, 180, 0, 0);
+            attackDamage = 10;
         }
-        else if (transform.localScale.x == 1f)
+        else
         {
-            arrowRotation.Set(0, 0, 0, 0);
+            attackDamage = 25;
         }
 
         if (combo == 2)
@@ -67,23 +69,23 @@ public class PlayerCombat : MonoBehaviour
         if (Input.GetMouseButtonDown(1))
         {
             Vector3 localScale = transform.localScale;
-            Instantiate(ProjectilePrefab, LaunchOffset.position, arrowRotation);
+            Instantiate(ProjectilePrefab, LaunchOffset.position, transform.rotation);
         }
 
     }
 
-    void Attack()
+    public void Attack()
     {
         // Play an attack
-        if (combo == 0)
+        if (combo == 0 && arrowHit == false)
         {
             animator.SetTrigger("Attack");
         }
-        else if (combo == 1)
+        else if (combo == 1 && arrowHit == false)
         {
             animator.SetTrigger("1");
         } 
-        else if (combo == 2)
+        else if (combo == 2 && arrowHit == false)
         {
             animator.SetTrigger("2");
         }
@@ -120,4 +122,5 @@ public class PlayerCombat : MonoBehaviour
 
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
+
 }

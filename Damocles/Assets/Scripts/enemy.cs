@@ -16,6 +16,8 @@ public class enemy : MonoBehaviour
     private bool takingDamage;
     private float timeTime;
 
+    private PlayerCombat playerCom;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,8 +50,7 @@ public class enemy : MonoBehaviour
 
         animator.SetTrigger("Ouch");
 
-        // Play hurt Animation
-
+        // Plays death Animation if current health reaches or goes below 0
         if (currentHealth <= 0)
         {
             Die();
