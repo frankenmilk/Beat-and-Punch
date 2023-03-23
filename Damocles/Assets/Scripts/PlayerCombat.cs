@@ -20,23 +20,12 @@ public class PlayerCombat : MonoBehaviour
     public ProjectileBehaviour ProjectilePrefab;
     public Transform LaunchOffset;
 
-    public bool arrowHit = false;
 
     [SerializeField] Rigidbody2D rb;
 
     // Update is called once per frame
     void Update()
     {
-
-        if (arrowHit == true)
-        {
-            attackDamage = 10;
-        }
-        else
-        {
-            attackDamage = 25;
-        }
-
         if (combo == 2)
         {
             attackDamage = 50;
@@ -77,15 +66,15 @@ public class PlayerCombat : MonoBehaviour
     public void Attack()
     {
         // Play an attack
-        if (combo == 0 && arrowHit == false)
+        if (combo == 0)
         {
             animator.SetTrigger("Attack");
         }
-        else if (combo == 1 && arrowHit == false)
+        else if (combo == 1)
         {
             animator.SetTrigger("1");
         } 
-        else if (combo == 2 && arrowHit == false)
+        else if (combo == 2)
         {
             animator.SetTrigger("2");
         }

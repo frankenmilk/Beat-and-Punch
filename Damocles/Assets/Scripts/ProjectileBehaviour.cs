@@ -13,13 +13,22 @@ public class ProjectileBehaviour : MonoBehaviour
         transform.position += transform.right * Time.deltaTime * shotSpeed;
     }
 
-    private void OnTriggerEnter2D(Collider2D hitInfo)
+    void OnTriggerEnter2D(Collider2D stinky)
     {
-        enemy enemy = hitInfo.GetComponent<enemy>();
-        if (enemy != null)
+        
+        Debug.Log(stinky.name);
+
+        if (stinky.gameObject.tag == "enemy")
         {
-            enemy.TakeDamage(arrowDamage);
+            enemy enemy = stinky.GetComponent<enemy>();
+
+            if (enemy != null)
+            {
+                enemy.TakeDamage(arrowDamage);
+            }
         }
-        Destroy(gameObject);
+        
+
+       // Destroy(gameObject);
     }
 }

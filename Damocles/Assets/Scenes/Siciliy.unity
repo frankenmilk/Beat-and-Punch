@@ -26936,7 +26936,6 @@ MonoBehaviour:
   attackRate: 0.5
   ProjectilePrefab: {fileID: 3757551017433640302, guid: a6d47e4cb7e425040a8ab36c0d1e648c, type: 3}
   LaunchOffset: {fileID: 1243764567}
-  arrowHit: 0
   rb: {fileID: 1706573988}
 --- !u!1 &1746732501
 GameObject:
@@ -26955,7 +26954,7 @@ GameObject:
   - component: {fileID: 1746732508}
   m_Layer: 11
   m_Name: TheGuard
-  m_TagString: Untagged
+  m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

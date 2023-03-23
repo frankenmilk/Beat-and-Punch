@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1073502925336124958}
   m_Layer: 0
   m_Name: Arrow
-  m_TagString: arrow
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,7 +99,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 446a16ad3e08ce04b9d437631c1f44dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shotSpeed: 1
+  shotSpeed: 20
+  arrowDamage: 10
 --- !u!50 &2591890529524780649
 Rigidbody2D:
   serializedVersion: 4
@@ -109,7 +110,7 @@ Rigidbody2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3757551017433640297}
   m_BodyType: 0
-  m_Simulated: 0
+  m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
