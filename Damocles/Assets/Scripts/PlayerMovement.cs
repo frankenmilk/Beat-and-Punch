@@ -34,10 +34,26 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform wallCheck;
     [SerializeField] private LayerMask wallLayer;
 
+    // Player Damage Stuff
+    private bool canMove = true;
+    private float timeTime;
+
+    int damage25 = 25;
+    //int damage50 = 50;
+
+    [SerializeField] float knockBackForce;
+    [SerializeField] float knockBackForceUp;
+
 
     // Start is called before the first frame update
     void Update()
     {
+        if (Time.time >= timeTime + 1f)
+        {
+            canMove = true;
+        }
+
+
         if (animator.GetBool("IsWallSliding") == true)
         {
             animator.SetBool("IsJumping", false);
@@ -54,17 +70,20 @@ public class PlayerMovement : MonoBehaviour
 
         horizontal = Input.GetAxisRaw("Horizontal");
 
-        if (Input.GetButtonDown("Jump") && IsGrounded())
+        if (canMove == true)
         {
-            animator.SetBool("IsJumping", true);
-            rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
-        }
+            if (Input.GetButtonDown("Jump") && IsGrounded())
+            {
+                animator.SetBool("IsJumping", true);
+                rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+            }
 
-        if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+            if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+            }
         }
-
+        
         WallSlide();
         WallJump();
 
@@ -76,7 +95,7 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!isWallJumping)
+        if (!isWallJumping && canMove == true)
         {
             rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
         }
@@ -158,5 +177,72 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    // Player Damage area
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.tag == "enemy25")
+        {
+            TakeDamage(damage25);
+        }
+    }
 
- }
+    public void Knockback()
+    {
+        Transform attacker = GetClosestDamageSource();
+        Vector2 knockbackDirection = new Vector2(transform.position.x - attacker.transform.position.x, 0);
+        rb.velocity = new Vector2(knockbackDirection.x, knockBackForceUp) * knockBackForce;
+    }
+
+    public Transform GetClosestDamageSource()
+    {
+        GameObject[] DamageSources = GameObject.FindGameObjectsWithTag("enemy25");
+        DamageSources = GameObject.FindGameObjectsWithTag("enemy50");
+        float closestDistance = Mathf.Infinity;
+        Transform currentClosestDamageSource = null;
+
+        foreach (GameObject go in DamageSources)
+        {
+            float currentDistance;
+            currentDistance = Vector3.Distance(transform.position, go.transform.position);
+            if (currentDistance < closestDistance)
+            {
+                closestDistance = currentDistance;
+                currentClosestDamageSource = go.transform;
+            }
+        }
+        return currentClosestDamageSource;
+    }
+
+    void TakeDamage(int damage)
+    {
+        canMove = false;
+        timeTime = Time.time;
+        Knockback();
+
+        PlayerStats.playerHealth -= damage;
+
+        animator.SetTrigger("Ouch");
+
+        // Plays death Animation if current health reaches or goes below 0
+        if (PlayerStats.playerHealth <= 0)
+        {
+            Die();
+        }
+
+    }
+
+    void Die()
+    {
+
+        // Plays death animation
+        animator.SetBool("IsNotAlive", true);
+
+        // Disables the enemy
+
+        GetComponent<Collider2D>().enabled = false;
+
+
+    }
+
+
+}

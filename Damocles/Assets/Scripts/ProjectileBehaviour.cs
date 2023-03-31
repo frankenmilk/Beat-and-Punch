@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ProjectileBehaviour : MonoBehaviour
 {
+    public float TimeToLive = 5f;
     public float shotSpeed;
     public int arrowDamage = 10;
 
@@ -12,13 +13,17 @@ public class ProjectileBehaviour : MonoBehaviour
     {
         transform.position += transform.right * Time.deltaTime * shotSpeed;
     }
+    void Start()
+    {
+        Destroy(gameObject, TimeToLive);
+    }
 
     void OnTriggerEnter2D(Collider2D stinky)
     {
         
         Debug.Log(stinky.name);
 
-        if (stinky.gameObject.tag == "enemy")
+        if (stinky.gameObject.tag == "enemy25" || stinky.gameObject.tag == "enemy50")
         {
             enemy enemy = stinky.GetComponent<enemy>();
 
@@ -32,3 +37,6 @@ public class ProjectileBehaviour : MonoBehaviour
        // Destroy(gameObject);
     }
 }
+
+
+
