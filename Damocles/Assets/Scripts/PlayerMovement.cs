@@ -39,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
     private float timeTime;
 
     int damage25 = 25;
+    int damage50 = 50;
     //int damage50 = 50;
 
     [SerializeField] float knockBackForce;
@@ -184,32 +185,54 @@ public class PlayerMovement : MonoBehaviour
         {
             TakeDamage(damage25);
         }
+        else if (col.gameObject.tag == "enemy50")
+        {
+            TakeDamage(damage50);
+        }
     }
 
-    public void Knockback()
+    public void Knockback(string enemy)
     {
-        Transform attacker = GetClosestDamageSource();
+        Transform attacker = GetClosestDamageSource(enemy);
         Vector2 knockbackDirection = new Vector2(transform.position.x - attacker.transform.position.x, 0);
         rb.velocity = new Vector2(knockbackDirection.x, knockBackForceUp) * knockBackForce;
     }
 
-    public Transform GetClosestDamageSource()
+    public Transform GetClosestDamageSource(string whichEnemy)
     {
-        GameObject[] DamageSources = GameObject.FindGameObjectsWithTag("enemy25");
-        DamageSources = GameObject.FindGameObjectsWithTag("enemy50");
+
+        GameObject[] DamageSources = null; 
+
+        if (whichEnemy == "25")
+        {
+            DamageSources = GameObject.FindGameObjectsWithTag("enemy25");
+        }
+        else if (whichEnemy == "50")
+        {
+            DamageSources = GameObject.FindGameObjectsWithTag("enemy50");
+        }
+            
+                
+        
         float closestDistance = Mathf.Infinity;
         Transform currentClosestDamageSource = null;
 
         foreach (GameObject go in DamageSources)
         {
+            Debug.Log("entered the foreach");
+
             float currentDistance;
             currentDistance = Vector3.Distance(transform.position, go.transform.position);
+            
             if (currentDistance < closestDistance)
             {
                 closestDistance = currentDistance;
                 currentClosestDamageSource = go.transform;
+
             }
+
         }
+
         return currentClosestDamageSource;
     }
 
@@ -217,9 +240,21 @@ public class PlayerMovement : MonoBehaviour
     {
         canMove = false;
         timeTime = Time.time;
-        Knockback();
+        if (damage == 25)
+        {
+            string enemy = "25";
+            Knockback(enemy);
+        } 
+        else if (damage == 50)
+        {
+            string enemy = "50";
+            Knockback(enemy);
+        }
+        
 
         PlayerStats.playerHealth -= damage;
+
+        Debug.Log("Player Current Health is: " + PlayerStats.playerHealth);
 
         animator.SetTrigger("Ouch");
 

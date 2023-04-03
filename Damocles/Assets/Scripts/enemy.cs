@@ -44,8 +44,11 @@ public class enemy : MonoBehaviour
     {
         takingDamage = true;
         timeTime = Time.time;
-        Knockback();
-
+        if (damage > 10)
+        {
+            Knockback();
+        }
+        
         currentHealth -= damage;
 
         animator.SetTrigger("Ouch");
@@ -95,6 +98,7 @@ public class enemy : MonoBehaviour
                 currentClosestDamageSource = go.transform;
             }
         }
+
         return currentClosestDamageSource;
     }
 
