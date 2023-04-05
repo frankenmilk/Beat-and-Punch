@@ -219,8 +219,6 @@ public class PlayerMovement : MonoBehaviour
 
         foreach (GameObject go in DamageSources)
         {
-            Debug.Log("entered the foreach");
-
             float currentDistance;
             currentDistance = Vector3.Distance(transform.position, go.transform.position);
             
