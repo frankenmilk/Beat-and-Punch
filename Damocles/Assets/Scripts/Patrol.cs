@@ -43,6 +43,11 @@ public class Patrol : MonoBehaviour
         {
             transform.localScale = new Vector2(-(Mathf.Sign(rb.velocity.x)), transform.localScale.y);
         }
+
+        if (collision.gameObject.tag == "EnemyJumpPad")
+        {
+            rb.velocity.y = ;
+        }
         
     }
 }
