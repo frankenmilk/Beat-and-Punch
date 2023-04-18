@@ -7,6 +7,7 @@ public class Patrol : MonoBehaviour
     [SerializeField] float moveSpeed = 1f;
 
     Rigidbody2D rb;
+    [SerializeField] float enemyJump = 6f;
 
     // Start is called before the first frame update
     void Start()
@@ -17,20 +18,26 @@ public class Patrol : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (IsFacingRight())
-        {
-            rb.velocity = new Vector2(moveSpeed, 0f);
-        }
-        else
-        {
-            rb.velocity = new Vector2(-moveSpeed, 0f);
-        }
+        Patroling();
     }
 
     void FixedUpdate()
     {
 
     }
+
+    void Patroling()
+    {
+        if (IsFacingRight())
+        {
+            rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
+        }
+        else
+        {
+            rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
+        }
+    }
+
 
     private bool IsFacingRight()
     {
@@ -46,7 +53,8 @@ public class Patrol : MonoBehaviour
 
         if (collision.gameObject.tag == "EnemyJumpPad")
         {
-            rb.velocity.y = ;
+            Debug.Log("stink");
+            rb.velocity = new Vector2(rb.velocity.x, enemyJump);
         }
         
     }
