@@ -68,6 +68,11 @@ public class enemy : MonoBehaviour
         animator.SetBool("IsNotAlive", true);
 
         // Disables the enemy
+        rb.gravityScale = 0;
+        rb.rotation = Random.Range(27, 180);
+        rb.velocity = Random.onUnitSphere * 10f;
+        //rb.AddForce(transform.right * 10f, transform.up * 10f, ForceMode2D.Impulse);
+
 
         GetComponent<Collider2D>().enabled = false;
         GetComponent<Patrol>().enabled = false;
