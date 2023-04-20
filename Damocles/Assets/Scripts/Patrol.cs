@@ -53,7 +53,6 @@ public class Patrol : MonoBehaviour
 
         if (collision.gameObject.tag == "EnemyJumpPad")
         {
-            Debug.Log("stink");
             rb.velocity = new Vector2(rb.velocity.x, enemyJump);
         }
         
