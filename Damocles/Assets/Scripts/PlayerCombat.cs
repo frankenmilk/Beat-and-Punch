@@ -16,6 +16,7 @@ public class PlayerCombat : MonoBehaviour
     public float attackRate = .2f; // maybe became useless ----> it became useless but I'll keep here just in case
     private float timeAtAttack;
     private float nextAttackTime = 0f;
+    private float nextAttackTime2 = 0f;
 
     public ProjectileBehaviour ProjectilePrefab;
     public Transform LaunchOffset;
@@ -55,11 +56,16 @@ public class PlayerCombat : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButtonDown(1))
+        if (Time.time >= nextAttackTime2)
         {
-            Vector3 localScale = transform.localScale;
-            Instantiate(ProjectilePrefab, LaunchOffset.position, transform.rotation);
+            if (Input.GetMouseButtonDown(1))
+            {
+                nextAttackTime2 = Time.time + .75f;
+                Vector3 localScale = transform.localScale;
+                Instantiate(ProjectilePrefab, LaunchOffset.position, transform.rotation);
+            }
         }
+        
 
     }
 

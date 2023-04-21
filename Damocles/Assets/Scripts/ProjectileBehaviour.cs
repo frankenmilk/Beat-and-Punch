@@ -20,8 +20,6 @@ public class ProjectileBehaviour : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D stinky)
     {
-        
-        Debug.Log(stinky.name);
 
         if (stinky.gameObject.tag == "enemy25" || stinky.gameObject.tag == "enemy50")
         {
