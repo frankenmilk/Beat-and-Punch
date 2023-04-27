@@ -12,15 +12,21 @@ public class RandomSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        for ()
-        int randEnemy = Random.Range(0, enemyPrefabs.Length);
+        Debug.Log(spawnPoints.Length);
+
+        int spawnPointNum = 0;
+
+        for (int i = 0; i < spawnPoints.Length; i++)
+        {
+            int randEnemy = Random.Range(0, enemyPrefabs.Length);
+            Instantiate(enemyPrefabs[randEnemy], spawnPoints[spawnPointNum].position, transform.rotation);
+
+            Debug.Log(spawnPointNum);
+            spawnPointNum++;
+        }
+        
         
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
