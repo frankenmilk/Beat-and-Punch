@@ -65,6 +65,14 @@ public class PlayerCombat : MonoBehaviour
                 Instantiate(ProjectilePrefab, LaunchOffset.position, transform.rotation);
             }
         }
+
+        if (Input.GetButtonDown("f"))
+        {
+            if (PlayerStats.currentSpecial == "ShieldOfAegis")
+            {
+
+            }
+        }
         
 
     }

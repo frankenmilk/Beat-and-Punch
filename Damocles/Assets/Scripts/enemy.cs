@@ -51,7 +51,6 @@ public class enemy : MonoBehaviour
         
         currentHealth -= damage;
 
-        animator.SetTrigger("Ouch");
 
         // Plays death Animation if current health reaches or goes below 0
         if (currentHealth <= 0)
@@ -62,12 +61,8 @@ public class enemy : MonoBehaviour
     }
     void Die()
     {
-        Debug.Log("enemy died :)");
 
-        // Plays death animation
-        animator.SetBool("IsNotAlive", true);
-
-        // Disables the enemy
+        // Throws Enemy in Random Direction
         rb.rotation = Random.Range(27, 180);
         rb.velocity = new Vector2(Random.Range(-30f, 30f), rb.velocity.y);
         rb.velocity = new Vector2(rb.velocity.x, Random.Range(0f, 60f));

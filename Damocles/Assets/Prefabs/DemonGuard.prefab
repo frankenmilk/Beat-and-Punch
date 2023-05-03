@@ -113,8 +113,8 @@ MonoBehaviour:
   animator: {fileID: 7652487512016488963}
   maxHealth: 100
   rb: {fileID: 7652487512016489022}
-  knockBackForce: 1.2
-  knockBackForceUp: 0
+  knockBackForce: 1.8
+  knockBackForceUp: 1
 --- !u!95 &7652487512016488963
 Animator:
   serializedVersion: 4

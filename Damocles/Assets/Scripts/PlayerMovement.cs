@@ -254,7 +254,7 @@ public class PlayerMovement : MonoBehaviour
 
         Debug.Log("Player Current Health is: " + PlayerStats.playerHealth);
 
-        animator.SetTrigger("Ouch");
+        
 
         // Plays death Animation if current health reaches or goes below 0
         if (PlayerStats.playerHealth <= 0)
@@ -266,11 +266,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Die()
     {
-
-        // Plays death animation
-        animator.SetBool("IsNotAlive", true);
-
-        // Disables the enemy
+        // Disables the Player
 
         GetComponent<Collider2D>().enabled = false;
 

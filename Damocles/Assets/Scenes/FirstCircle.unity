@@ -56257,8 +56257,8 @@ MonoBehaviour:
   wallLayer:
     serializedVersion: 2
     m_Bits: 128
-  knockBackForce: 0
-  knockBackForceUp: 0
+  knockBackForce: 2.8
+  knockBackForceUp: 1
 --- !u!50 &1158007167
 Rigidbody2D:
   serializedVersion: 4
