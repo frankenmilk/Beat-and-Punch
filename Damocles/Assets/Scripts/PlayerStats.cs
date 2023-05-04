@@ -8,7 +8,7 @@ public class PlayerStats : MonoBehaviour
 
     public static string currentWeapon;
     public static string currentRangedWeapon;
-    public static string currentSpecial;
+    public static string currentSpecial = "ShieldOfAegis";
     public static string currentCostume;
 
 

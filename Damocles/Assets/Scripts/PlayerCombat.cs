@@ -14,9 +14,10 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] int combo = 0;
 
     public float attackRate = .2f; // maybe became useless ----> it became useless but I'll keep here just in case
-    private float timeAtAttack;
+    private float timeAt;
     private float nextAttackTime = 0f;
     private float nextAttackTime2 = 0f;
+
 
     public ProjectileBehaviour ProjectilePrefab;
     public Transform LaunchOffset;
@@ -42,7 +43,7 @@ public class PlayerCombat : MonoBehaviour
             {
                 Attack();
                 nextAttackTime = Time.time + 1f;
-                timeAtAttack = Time.time;
+                timeAt = Time.time;
 
             }
         } 
@@ -66,11 +67,20 @@ public class PlayerCombat : MonoBehaviour
             }
         }
 
-        if (Input.GetButtonDown("f"))
+        if (Input.GetKeyDown(KeyCode.F))
         {
             if (PlayerStats.currentSpecial == "ShieldOfAegis")
             {
-
+                animator.SetBool("AegisActive", true);
+                Collider2D[] blockedEnemies = Physics2D.OverlapCircleAll(rb.position, 2f);
+            }
+        }
+        
+        if (Input.GetKeyUp(KeyCode.F))
+        {
+            if (PlayerStats.currentSpecial == "ShieldOfAegis")
+            {
+                animator.SetBool("AegisActive", false);
             }
         }
         
@@ -124,6 +134,6 @@ public class PlayerCombat : MonoBehaviour
         }
 
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
-    }
+        Gizmos.DrawWireSphere(rb.position, 2f);    }
 
 }
