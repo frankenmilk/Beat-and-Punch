@@ -12,7 +12,6 @@ public class RandomSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log(spawnPoints.Length);
 
         int spawnPointNum = 0;
 

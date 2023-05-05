@@ -13,10 +13,9 @@ public class PlayerCombat : MonoBehaviour
     public int attackDamage = 25;
     [SerializeField] int combo = 0;
 
-    public float attackRate = .2f; // maybe became useless ----> it became useless but I'll keep here just in case
-    private float timeAt;
     private float nextAttackTime = 0f;
-    private float nextAttackTime2 = 0f;
+    private float nextArrowTime = 0f;
+    private float nextSpecialTime = 0f;
 
 
     public ProjectileBehaviour ProjectilePrefab;
@@ -43,7 +42,6 @@ public class PlayerCombat : MonoBehaviour
             {
                 Attack();
                 nextAttackTime = Time.time + 1f;
-                timeAt = Time.time;
 
             }
         } 
@@ -57,11 +55,11 @@ public class PlayerCombat : MonoBehaviour
             }
         }
 
-        if (Time.time >= nextAttackTime2)
+        if (Time.time >= nextArrowTime)
         {
             if (Input.GetMouseButtonDown(1))
             {
-                nextAttackTime2 = Time.time + .75f;
+                nextArrowTime = Time.time + .75f;
                 Vector3 localScale = transform.localScale;
                 Instantiate(ProjectilePrefab, LaunchOffset.position, transform.rotation);
             }
@@ -71,16 +69,104 @@ public class PlayerCombat : MonoBehaviour
         {
             if (PlayerStats.currentSpecial == "ShieldOfAegis")
             {
+                PlayerStats.AegisActive = true;
                 animator.SetBool("AegisActive", true);
-                Collider2D[] blockedEnemies = Physics2D.OverlapCircleAll(rb.position, 2f);
+                GetComponent<PlayerMovement>().enabled = false;
             }
+
+            if (Time.time >= nextSpecialTime)
+            {
+                if (PlayerStats.currentSpecial == "FiresOfHell")
+                {
+                    PlayerStats.FireActive = true;
+                    animator.SetBool("FireActive", true);
+                    GetComponent<PlayerMovement>().enabled = false;
+                    rb.velocity = new Vector2(0, rb.velocity.y); // Sets the Player Velocity to 0
+
+                    Collider2D[] SpecialHitEnemies = Physics2D.OverlapCircleAll(rb.position, 2.8f, enemyLayers);
+
+                    // Damages the Enemey
+                    foreach (Collider2D enemy in SpecialHitEnemies)
+                    {
+                        enemy.GetComponent<enemy>().TakeDamage(PlayerStats.FiresOfHellDamage);
+                    }
+
+                }
+            }
+            
+            if (PlayerStats.currentSpecial == "HermesCaduceus")
+            {
+                PlayerStats.CaduceusActive = true;
+                animator.SetBool("CaduceusActive", true);
+                GetComponent<PlayerMovement>().enabled = false;
+                rb.velocity = new Vector2(0, rb.velocity.y); // Sets the Player Velocity to 0
+
+                Collider2D[] SpecialHitEnemies = Physics2D.OverlapCircleAll(rb.position, 10f, enemyLayers);
+
+                // Damages the Enemey
+                foreach (Collider2D enemy in SpecialHitEnemies)
+                {
+                    float slowEnd = Time.time + PlayerStats.slowTime;
+
+                    if (Time.time <= slowEnd)
+                    {
+                        enemy.GetComponent<Patrol>().slowed = true;
+                    }
+                    else if (Time.time > slowEnd)
+                    {
+                        enemy.GetComponent<Patrol>().slowed = false;
+                    }
+
+
+
+                }
+            }
+
+            if (PlayerStats.currentSpecial == "")
+            {
+
+            }
+
+            if (PlayerStats.currentSpecial == "")
+            {
+
+            }
+
+            if (PlayerStats.currentSpecial == "")
+            {
+
+            }
+
+            if (PlayerStats.currentSpecial == "")
+            {
+
+            }
+
+
         }
         
         if (Input.GetKeyUp(KeyCode.F))
         {
             if (PlayerStats.currentSpecial == "ShieldOfAegis")
             {
+                PlayerStats.AegisActive = false;
                 animator.SetBool("AegisActive", false);
+                GetComponent<PlayerMovement>().enabled = true;
+            }
+
+            if (PlayerStats.currentSpecial == "FiresOfHell")
+            {
+                PlayerStats.FireActive = false;
+                animator.SetBool("FireActive", false);
+                GetComponent<PlayerMovement>().enabled = true;
+                nextSpecialTime = Time.time + 10f;
+            }
+
+            if (PlayerStats.currentSpecial == "HermesCaduceus")
+            {
+                PlayerStats.CaduceusActive = false;
+                animator.SetBool("CaduceusActive", false);
+                GetComponent<PlayerMovement>().enabled = true;
             }
         }
         
@@ -134,6 +220,7 @@ public class PlayerCombat : MonoBehaviour
         }
 
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
-        Gizmos.DrawWireSphere(rb.position, 2f);    }
+        Gizmos.DrawWireSphere(rb.position, 10f);    
+    }
 
 }

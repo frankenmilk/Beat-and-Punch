@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class Patrol : MonoBehaviour
 {
-    [SerializeField] float moveSpeed = 1f;
 
-    Rigidbody2D rb;
+    public bool slowed = false;
+    [SerializeField] float slowedSpeed = 1f;
+    [SerializeField] float unslowedSpeed = 23f;
+    private float moveSpeed;
     [SerializeField] float enemyJump = 6f;
+    Rigidbody2D rb;
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +21,14 @@ public class Patrol : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (slowed == true)
+        {
+            moveSpeed = slowedSpeed; 
+        }
+        else if (slowed == false)
+        {
+            moveSpeed = unslowedSpeed;
+        }
         Patroling();
     }
 

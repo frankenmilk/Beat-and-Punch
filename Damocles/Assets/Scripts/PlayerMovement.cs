@@ -181,11 +181,11 @@ public class PlayerMovement : MonoBehaviour
     // Player Damage area
     private void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.tag == "enemy25")
+        if (col.gameObject.tag == "enemy25" && PlayerStats.AegisActive == false)
         {
             TakeDamage(damage25);
         }
-        else if (col.gameObject.tag == "enemy50")
+        else if (col.gameObject.tag == "enemy50" && PlayerStats.AegisActive == false)
         {
             TakeDamage(damage50);
         }

@@ -96,7 +96,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7827cad2ac0fedc4fb25829e0be59e8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  slowed: 0
+  slowedSpeed: 1
+  unslowedSpeed: 3
   enemyJump: 16
 --- !u!114 &4603168674154446568
 MonoBehaviour:
