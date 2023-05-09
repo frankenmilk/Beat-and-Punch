@@ -108,14 +108,17 @@ public class PlayerCombat : MonoBehaviour
                 {
                     float slowEnd = Time.time + PlayerStats.slowTime;
 
-                    if (Time.time <= slowEnd)
+                    IEnumerator Slower()
                     {
                         enemy.GetComponent<Patrol>().slowed = true;
-                    }
-                    else if (Time.time > slowEnd)
-                    {
+                        Debug.Log("Losers got slowed");
+                        yield return new WaitForSeconds(PlayerStats.slowTime);
                         enemy.GetComponent<Patrol>().slowed = false;
                     }
+
+                    StartCoroutine(Slower());
+
+                    
 
 
 
@@ -173,6 +176,7 @@ public class PlayerCombat : MonoBehaviour
 
     }
 
+
     public void Attack()
     {
         // Play an attack
@@ -199,6 +203,7 @@ public class PlayerCombat : MonoBehaviour
             enemy.GetComponent<enemy>().TakeDamage(attackDamage);
         }
     }
+
     public void StartCombo()
     {
         if (combo < 3)
@@ -222,5 +227,7 @@ public class PlayerCombat : MonoBehaviour
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
         Gizmos.DrawWireSphere(rb.position, 10f);    
     }
+
+
 
 }
