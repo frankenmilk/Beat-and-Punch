@@ -26936,7 +26936,6 @@ MonoBehaviour:
   attackRange: 0.8
   attackDamage: 25
   combo: 0
-  attackRate: 0.5
   ProjectilePrefab: {fileID: 3757551017433640302, guid: a6d47e4cb7e425040a8ab36c0d1e648c, type: 3}
   LaunchOffset: {fileID: 1243764567}
   rb: {fileID: 1706573988}
@@ -27073,7 +27072,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7827cad2ac0fedc4fb25829e0be59e8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  slowed: 0
+  slowedSpeed: 1
+  unslowedSpeed: 23
+  enemyJump: 6
 --- !u!61 &1746732506
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -27385,7 +27387,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1794280358}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 240.62, y: 9.76, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
