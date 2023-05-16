@@ -22,6 +22,7 @@ public class TooltipScreenSpaceUI : MonoBehaviour
         textMeshPro = transform.Find("Text").GetComponent<TextMeshProUGUI>();
         rectTransform = transform.GetComponent<RectTransform>();
 
+        HideTooltip();
     }
 
     private void SetText(string tooltipText)

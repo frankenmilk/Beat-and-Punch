@@ -16,11 +16,16 @@ public class CardInfo : MonoBehaviour
      * Hello, my name is:
      * John Pork
      * 
+     * Note:
+     * Adding a \n and then a space after (hello\n hello) causes the result to look like this.
      * 
+     * hello
+     *  hello
+     *  
      * */
 
     // Start is called before the first frame update
-    void Start()
+    public void SendCardInfo()
     {
         TooltipScreenSpaceUI.ShowTooltip_Static(Information);
     }
