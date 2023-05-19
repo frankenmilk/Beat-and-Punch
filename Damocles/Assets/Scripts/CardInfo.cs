@@ -6,6 +6,9 @@ public class CardInfo : MonoBehaviour
 {
     [SerializeField] string Information;
 
+    public string content;
+    public string header;
+
     /* Quick Tip!!!
      * 
      * Use \n to cut the line and start at the next line down
@@ -24,9 +27,9 @@ public class CardInfo : MonoBehaviour
      *  
      * */
 
-    // Start is called before the first frame update
     public void SendCardInfo()
     {
-        TooltipScreenSpaceUI.ShowTooltip_Static(Information);
+        // TooltipScreenSpaceUI.ShowTooltip_Static(Information);
+        TooltipSystem.Show(content, header);
     }
 }
