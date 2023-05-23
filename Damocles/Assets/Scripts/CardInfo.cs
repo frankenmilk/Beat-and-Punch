@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class CardInfo : MonoBehaviour
 {
-    [SerializeField] string Information;
-
-    public string content;
-    public string header;
+    [SerializeField] string information;
 
     /* Quick Tip!!!
      * 
@@ -29,7 +26,6 @@ public class CardInfo : MonoBehaviour
 
     public void SendCardInfo()
     {
-        // TooltipScreenSpaceUI.ShowTooltip_Static(Information);
-        TooltipSystem.Show(content, header);
+        TooltipScreenSpaceUI.ShowTooltip_Static(System.Text.RegularExpressions.Regex.Unescape(information));
     }
 }
