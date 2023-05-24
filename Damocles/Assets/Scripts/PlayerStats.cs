@@ -11,6 +11,8 @@ public class PlayerStats : MonoBehaviour
     public static string currentRangedWeapon;
 
     public static string currentSpecial = "HermesCaduceus";
+
+    //Active Cards
     public static bool AegisActive;
     public static bool FireActive;
         public static int FiresOfHellDamage = 100;
@@ -21,6 +23,13 @@ public class PlayerStats : MonoBehaviour
 
 
     public static string currentCostume;
+
+
+
+    // For CardInfo
+    
+
+    // Non-active Cards 
 
 
 
