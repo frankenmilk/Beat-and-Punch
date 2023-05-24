@@ -19,11 +19,8 @@ public class RandomCard : MonoBehaviour
 
         for (int i = 0; i < spawnPoints.Length; i++)
         {
-<<<<<<< HEAD
             int randCard = Random.Range(1, cardNumbers.Count);
-=======
-            int randCard = Random.Range(0, cardNumbers.Count);
->>>>>>> ff9f1fecb2ca858d47d50cc78dcb1897a7919e41
+
             cardObjects[randCard].transform.position = new Vector2(spawnPoints[spawnPointNum].position.x, spawnPoints[spawnPointNum].position.y);
             cardNumbers.RemoveAt(randCard);
 
