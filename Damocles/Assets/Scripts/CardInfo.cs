@@ -5,10 +5,8 @@ using UnityEngine;
 public class CardInfo : MonoBehaviour
 {
     [SerializeField] string information;
-<<<<<<< HEAD
     [SerializeReference] int cardNumber;
-=======
->>>>>>> ff9f1fecb2ca858d47d50cc78dcb1897a7919e41
+
 
     /* Quick Tip!!!
      * 
@@ -30,11 +28,8 @@ public class CardInfo : MonoBehaviour
 
     public void SendCardInfo()
     {
-<<<<<<< HEAD
         CardPicker.selectedCard = cardNumber;
         Debug.Log(cardNumber);
-=======
->>>>>>> ff9f1fecb2ca858d47d50cc78dcb1897a7919e41
         TooltipScreenSpaceUI.ShowTooltip_Static(System.Text.RegularExpressions.Regex.Unescape(information));
     }
 }
