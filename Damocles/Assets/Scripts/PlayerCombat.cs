@@ -16,6 +16,7 @@ public class PlayerCombat : MonoBehaviour
     private float nextAttackTime = 0f;
     private float nextArrowTime = 0f;
     private float nextSpecialTime = 0f;
+    private float comboTime = 0f;
 
 
     public ProjectileBehaviour ProjectilePrefab;
@@ -27,6 +28,11 @@ public class PlayerCombat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (combo == 1)
+        {
+            attackDamage = 25;
+            comboTime = Time.time + 2f;
+        }
         if (combo == 2)
         {
             attackDamage = 50;

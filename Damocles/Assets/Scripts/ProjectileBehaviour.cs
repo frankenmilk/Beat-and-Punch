@@ -30,9 +30,13 @@ public class ProjectileBehaviour : MonoBehaviour
                 enemy.TakeDamage(arrowDamage);
             }
         }
-        
+        else if (stinky.gameObject.tag == "floor" || stinky.gameObject.tag == "wall")
+        {
+            Destroy(gameObject);
+        }
 
-       // Destroy(gameObject);
+
+
     }
 }
 
