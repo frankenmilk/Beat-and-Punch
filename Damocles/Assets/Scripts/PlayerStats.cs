@@ -10,7 +10,7 @@ public class PlayerStats : MonoBehaviour
 
     public static string currentRangedWeapon;
 
-    public static string currentSpecial = "HermesCaduceus";
+    public static string currentSpecial = "Sudoken";
 
     //Active Cards
     public static bool AegisActive;
@@ -18,6 +18,8 @@ public class PlayerStats : MonoBehaviour
         public static int FiresOfHellDamage = 100;
     public static bool CaduceusActive;
         public static float slowTime = 4f;
+    public static bool SudokenActive;
+        public static int SudokenDamage = 25;
 
 
 

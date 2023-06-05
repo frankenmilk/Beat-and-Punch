@@ -6,7 +6,7 @@ public class ProjectileBehaviour : MonoBehaviour
 {
     public float TimeToLive = 5f;
     public float shotSpeed;
-    public int arrowDamage = 10;
+    public int arrowDamage;
 
     // Update is called once per frame
     void Update()

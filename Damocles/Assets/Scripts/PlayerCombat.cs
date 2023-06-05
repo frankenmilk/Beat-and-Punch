@@ -99,41 +99,46 @@ public class PlayerCombat : MonoBehaviour
 
                 }
             }
-            
-            if (PlayerStats.currentSpecial == "HermesCaduceus")
+
+            if (Time.time >= nextSpecialTime)
             {
-                PlayerStats.CaduceusActive = true;
-                animator.SetBool("CaduceusActive", true);
-                GetComponent<PlayerMovement>().enabled = false;
-                rb.velocity = new Vector2(0, rb.velocity.y); // Sets the Player Velocity to 0
-
-                Collider2D[] SpecialHitEnemies = Physics2D.OverlapCircleAll(rb.position, 10f, enemyLayers);
-
-                // Damages the Enemey
-                foreach (Collider2D enemy in SpecialHitEnemies)
+                if (PlayerStats.currentSpecial == "HermesCaduceus")
                 {
-                    float slowEnd = Time.time + PlayerStats.slowTime;
+                    PlayerStats.CaduceusActive = true;
+                    animator.SetBool("CaduceusActive", true);
+                    GetComponent<PlayerMovement>().enabled = false;
+                    rb.velocity = new Vector2(0, rb.velocity.y); // Sets the Player Velocity to 0
 
-                    IEnumerator Slower()
+                    Collider2D[] SpecialHitEnemies = Physics2D.OverlapCircleAll(rb.position, 10f, enemyLayers);
+
+                    // Damages the Enemey
+                    foreach (Collider2D enemy in SpecialHitEnemies)
                     {
-                        enemy.GetComponent<Patrol>().slowed = true;
-                        Debug.Log("Losers got slowed");
-                        yield return new WaitForSeconds(PlayerStats.slowTime);
-                        enemy.GetComponent<Patrol>().slowed = false;
+                        float slowEnd = Time.time + PlayerStats.slowTime;
+
+                        IEnumerator Slower()
+                        {
+                            enemy.GetComponent<Patrol>().slowed = true;
+                            Debug.Log("Losers got slowed");
+                            yield return new WaitForSeconds(PlayerStats.slowTime);
+                            enemy.GetComponent<Patrol>().slowed = false;
+                        }
+
+                        StartCoroutine(Slower());
                     }
-
-                    StartCoroutine(Slower());
-
-                    
-
-
-
                 }
             }
+            
+            
 
-            if (PlayerStats.currentSpecial == "")
+            if (PlayerStats.currentSpecial == "Sudoken")
             {
-
+                if (Input.GetMouseButtonDown(1) && PlayerStats.SudokenActive == false)
+                {
+                    nextArrowTime = Time.time + .75f;
+                    Vector3 localScale = transform.localScale;
+                    Instantiate(ProjectilePrefab, LaunchOffset.position, transform.rotation);
+      
             }
 
             if (PlayerStats.currentSpecial == "")
