@@ -50,8 +50,8 @@ public class PlayerCombat : MonoBehaviour
                 nextAttackTime = Time.time + 1f;
 
             }
-        } 
-        
+        }
+
         // Begins the combo attack
         if (combo > 0)
         {
@@ -128,8 +128,8 @@ public class PlayerCombat : MonoBehaviour
                     }
                 }
             }
-            
-            
+
+
 
             if (PlayerStats.currentSpecial == "Sudoken")
             {
@@ -138,107 +138,105 @@ public class PlayerCombat : MonoBehaviour
                     nextArrowTime = Time.time + .75f;
                     Vector3 localScale = transform.localScale;
                     Instantiate(ProjectilePrefab, LaunchOffset.position, transform.rotation);
-      
+
+                }
             }
 
-            if (PlayerStats.currentSpecial == "")
+                if (PlayerStats.currentSpecial == "")
+                {
+
+                }
+
+                if (PlayerStats.currentSpecial == "")
+                {
+
+                }
+
+                if (PlayerStats.currentSpecial == "")
+                {
+
+                }
+
+
+
+            if (Input.GetKeyUp(KeyCode.F))
             {
+                if (PlayerStats.currentSpecial == "ShieldOfAegis")
+                {
+                    PlayerStats.AegisActive = false;
+                    animator.SetBool("AegisActive", false);
+                    GetComponent<PlayerMovement>().enabled = true;
+                }
 
+                if (PlayerStats.currentSpecial == "FiresOfHell")
+                {
+                    PlayerStats.FireActive = false;
+                    animator.SetBool("FireActive", false);
+                    GetComponent<PlayerMovement>().enabled = true;
+                    nextSpecialTime = Time.time + 10f;
+                }
+
+                if (PlayerStats.currentSpecial == "HermesCaduceus")
+                {
+                    PlayerStats.CaduceusActive = false;
+                    animator.SetBool("CaduceusActive", false);
+                    GetComponent<PlayerMovement>().enabled = true;
+                }
             }
 
-            if (PlayerStats.currentSpecial == "")
-            {
 
-            }
-
-            if (PlayerStats.currentSpecial == "")
-            {
-
-            }
-
-
-        }
-        
-        if (Input.GetKeyUp(KeyCode.F))
-        {
-            if (PlayerStats.currentSpecial == "ShieldOfAegis")
-            {
-                PlayerStats.AegisActive = false;
-                animator.SetBool("AegisActive", false);
-                GetComponent<PlayerMovement>().enabled = true;
-            }
-
-            if (PlayerStats.currentSpecial == "FiresOfHell")
-            {
-                PlayerStats.FireActive = false;
-                animator.SetBool("FireActive", false);
-                GetComponent<PlayerMovement>().enabled = true;
-                nextSpecialTime = Time.time + 10f;
-            }
-
-            if (PlayerStats.currentSpecial == "HermesCaduceus")
-            {
-                PlayerStats.CaduceusActive = false;
-                animator.SetBool("CaduceusActive", false);
-                GetComponent<PlayerMovement>().enabled = true;
-            }
-        }
-        
-
-    }
-
-
-    public void Attack()
-    {
-        // Play an attack
-        if (combo == 0)
-        {
-            animator.SetTrigger("Attack");
-        }
-        else if (combo == 1)
-        {
-            animator.SetTrigger("1");
-        } 
-        else if (combo == 2)
-        {
-            animator.SetTrigger("2");
-        }
-        
-
-        // Detect enemies in range of attack 
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
-
-        // Damage them
-        foreach(Collider2D enemy in hitEnemies)
-        {
-            enemy.GetComponent<enemy>().TakeDamage(attackDamage);
         }
     }
 
-    public void StartCombo()
-    {
-        if (combo < 3)
+        public void Attack()
         {
-            combo++;
+            // Play an attack
+            if (combo == 0)
+            {
+                animator.SetTrigger("Attack");
+            }
+            else if (combo == 1)
+            {
+                animator.SetTrigger("1");
+            }
+            else if (combo == 2)
+            {
+                animator.SetTrigger("2");
+            }
+
+
+            // Detect enemies in range of attack 
+            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+
+            // Damage them
+            foreach (Collider2D enemy in hitEnemies)
+            {
+                enemy.GetComponent<enemy>().TakeDamage(attackDamage);
+            }
         }
-    }
 
-    public void FinishAnimaton()
-    {
-        combo = 0;
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        if (attackPoint == null)
+        public void StartCombo()
         {
-            return;
+            if (combo < 3)
+            {
+                combo++;
+            }
         }
 
-        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
-        Gizmos.DrawWireSphere(rb.position, 10f);    
-    }
+        public void FinishAnimaton()
+        {
+            combo = 0;
+        }
 
+        private void OnDrawGizmosSelected()
+        {
+            if (attackPoint == null)
+            {
+                return;
+            }
 
+            Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+            Gizmos.DrawWireSphere(rb.position, 10f);
+        }
 
 }
