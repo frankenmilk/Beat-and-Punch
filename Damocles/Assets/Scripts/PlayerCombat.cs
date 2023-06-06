@@ -15,11 +15,12 @@ public class PlayerCombat : MonoBehaviour
 
     private float nextAttackTime = 0f;
     private float nextArrowTime = 0f;
-    private float nextSpecialTime = 0f;
+    private float specialCooldown = 0f;
     private float comboTime = 0f;
 
 
-    public ProjectileBehaviour ProjectilePrefab;
+    public ProjectileBehaviour ArrowPrefab;
+    public ProjectileBehaviour SudokenPrefab;
     public Transform LaunchOffset;
 
 
@@ -67,7 +68,7 @@ public class PlayerCombat : MonoBehaviour
             {
                 nextArrowTime = Time.time + .75f;
                 Vector3 localScale = transform.localScale;
-                Instantiate(ProjectilePrefab, LaunchOffset.position, transform.rotation);
+                Instantiate(ArrowPrefab, LaunchOffset.position, transform.rotation);
             }
         }
 
@@ -80,7 +81,7 @@ public class PlayerCombat : MonoBehaviour
                 GetComponent<PlayerMovement>().enabled = false;
             }
 
-            if (Time.time >= nextSpecialTime)
+            if (Time.time >= specialCooldown)
             {
                 if (PlayerStats.currentSpecial == "FiresOfHell")
                 {
@@ -100,7 +101,7 @@ public class PlayerCombat : MonoBehaviour
                 }
             }
 
-            if (Time.time >= nextSpecialTime)
+            if (Time.time >= specialCooldown)
             {
                 if (PlayerStats.currentSpecial == "HermesCaduceus")
                 {
@@ -130,17 +131,16 @@ public class PlayerCombat : MonoBehaviour
             }
 
 
-
-            if (PlayerStats.currentSpecial == "Sudoken")
+            if (Time.time >= specialCooldown)
             {
-                if (Input.GetMouseButtonDown(1) && PlayerStats.SudokenActive == false)
+                if (PlayerStats.currentSpecial == "Sudoken")
                 {
-                    nextArrowTime = Time.time + .75f;
                     Vector3 localScale = transform.localScale;
-                    Instantiate(ProjectilePrefab, LaunchOffset.position, transform.rotation);
+                    Instantiate(SudokenPrefab, LaunchOffset.position, transform.rotation);
 
                 }
             }
+            
 
                 if (PlayerStats.currentSpecial == "")
                 {
@@ -173,7 +173,7 @@ public class PlayerCombat : MonoBehaviour
                     PlayerStats.FireActive = false;
                     animator.SetBool("FireActive", false);
                     GetComponent<PlayerMovement>().enabled = true;
-                    nextSpecialTime = Time.time + 10f;
+                    specialCooldown = Time.time + 25f;
                 }
 
                 if (PlayerStats.currentSpecial == "HermesCaduceus")
@@ -181,6 +181,13 @@ public class PlayerCombat : MonoBehaviour
                     PlayerStats.CaduceusActive = false;
                     animator.SetBool("CaduceusActive", false);
                     GetComponent<PlayerMovement>().enabled = true;
+                    specialCooldown = Time.time + 20f;
+                }
+
+                if (PlayerStats.currentSpecial == "Sudoken")
+                {
+                    PlayerStats.CaduceusActive = false;
+                    specialCooldown = Time.time + 10f;
                 }
             }
 
