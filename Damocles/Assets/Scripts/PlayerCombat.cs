@@ -72,6 +72,9 @@ public class PlayerCombat : MonoBehaviour
             }
         }
 
+
+
+        // Specials 
         if (Input.GetKeyDown(KeyCode.F))
         {
             if (PlayerStats.currentSpecial == "ShieldOfAegis")
@@ -140,7 +143,35 @@ public class PlayerCombat : MonoBehaviour
 
                 }
             }
-            
+
+            if (Time.time >= specialCooldown)
+            {
+                if (PlayerStats.currentSpecial == "MedusaHead")
+                {
+                    GetComponent<PlayerMovement>().enabled = false;
+                    animator.SetBool("MedusaActive", true);
+                    rb.velocity = new Vector2(0, rb.velocity.y); // Sets the Player Velocity to 0
+
+                    Collider2D[] SpecialHitEnemies = Physics2D.OverlapCircleAll(rb.position, 10f, enemyLayers);
+
+
+                    foreach (Collider2D enemy in SpecialHitEnemies)
+                    {
+                        float freezeEnd = Time.time + PlayerStats.freezeTime;
+
+                        IEnumerator Freeze()
+                        {
+                            enemy.GetComponent<Patrol>().frozen = true;
+                            Debug.Log("Losers got F R O Z E N");
+                            yield return new WaitForSeconds(PlayerStats.freezeTime);
+                            enemy.GetComponent<Patrol>().frozen = false;
+                        }
+
+                        StartCoroutine(Freeze());
+                    }
+                }
+            }
+                
 
                 if (PlayerStats.currentSpecial == "")
                 {
@@ -151,14 +182,10 @@ public class PlayerCombat : MonoBehaviour
                 {
 
                 }
-
-                if (PlayerStats.currentSpecial == "")
-                {
-
-                }
-
-
-
+        }
+        
+        if (Time.time >= specialCooldown)
+        {
             if (Input.GetKeyUp(KeyCode.F))
             {
                 if (PlayerStats.currentSpecial == "ShieldOfAegis")
@@ -189,9 +216,15 @@ public class PlayerCombat : MonoBehaviour
                     PlayerStats.CaduceusActive = false;
                     specialCooldown = Time.time + 10f;
                 }
+
+                if (PlayerStats.currentSpecial == "MedusaHead")
+                {
+                    PlayerStats.MedusaActive = false;
+                    animator.SetBool("MedusaActive", false);
+                    GetComponent<PlayerMovement>().enabled = true;
+                    specialCooldown = Time.time + 30f;
+                }
             }
-
-
         }
     }
 
@@ -243,7 +276,7 @@ public class PlayerCombat : MonoBehaviour
             }
 
             Gizmos.DrawWireSphere(attackPoint.position, attackRange);
-            Gizmos.DrawWireSphere(rb.position, 10f);
+            Gizmos.DrawWireSphere(rb.position, 20f);
         }
 
 }

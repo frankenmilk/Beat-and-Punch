@@ -6,8 +6,10 @@ public class Patrol : MonoBehaviour
 {
 
     public bool slowed = false;
+    public bool frozen = false;
     [SerializeField] float slowedSpeed = 1f;
-    [SerializeField] float unslowedSpeed = 23f;
+    [SerializeField] float frozenSpeed = 0f;
+    [SerializeField] float normalSpeed = 23f;
     private float moveSpeed;
     [SerializeField] float enemyJump = 6f;
     Rigidbody2D rb;
@@ -25,9 +27,17 @@ public class Patrol : MonoBehaviour
         {
             moveSpeed = slowedSpeed; 
         }
+        else if (frozen == true)
+        {
+            moveSpeed = frozenSpeed;
+        }
         else if (slowed == false)
         {
-            moveSpeed = unslowedSpeed;
+            moveSpeed = normalSpeed;
+        }
+        else if (frozen == false)
+        {
+            moveSpeed = normalSpeed;
         }
         Patroling();
     }
