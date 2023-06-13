@@ -173,9 +173,20 @@ public class PlayerCombat : MonoBehaviour
             }
                 
 
-                if (PlayerStats.currentSpecial == "")
+                if (PlayerStats.currentSpecial == "TheMask")
                 {
+                    PlayerStats.MaskActive = true;
+                    animator.SetBool("MaskActive", true);
+                    GetComponent<PlayerMovement>().enabled = false;
+                    rb.velocity = new Vector2(0, rb.velocity.y); // Sets the Player Velocity to 0
 
+                    Collider2D[] SpecialHitEnemies = Physics2D.OverlapCircleAll(rb.position, 2.8f, enemyLayers);
+
+                    // Damages the Enemey
+                    foreach (Collider2D enemy in SpecialHitEnemies)
+                    {
+                        enemy.GetComponent<enemy>().TakeDamage(PlayerStats.FiresOfHellDamage);
+                    }
                 }
 
                 if (PlayerStats.currentSpecial == "")
