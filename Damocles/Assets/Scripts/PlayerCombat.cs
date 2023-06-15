@@ -197,57 +197,55 @@ public class PlayerCombat : MonoBehaviour
 
                 }
         }
-        
-        if (Time.time >= specialCooldown)
+
+        if (Input.GetKeyUp(KeyCode.F))
         {
-            if (Input.GetKeyUp(KeyCode.F))
+            if (PlayerStats.currentSpecial == "ShieldOfAegis")
             {
-                if (PlayerStats.currentSpecial == "ShieldOfAegis")
-                {
-                    PlayerStats.AegisActive = false;
-                    animator.SetBool("AegisActive", false);
-                    GetComponent<PlayerMovement>().enabled = true;
-                }
+                PlayerStats.AegisActive = false;
+                animator.SetBool("AegisActive", false);
+                GetComponent<PlayerMovement>().enabled = true;
+            }
 
-                if (PlayerStats.currentSpecial == "FiresOfHell")
-                {
-                    PlayerStats.FireActive = false;
-                    animator.SetBool("FireActive", false);
-                    GetComponent<PlayerMovement>().enabled = true;
-                    specialCooldown = Time.time + 25f;
-                }
+            if (PlayerStats.currentSpecial == "FiresOfHell")
+            {
+                PlayerStats.FireActive = false;
+                animator.SetBool("FireActive", false);
+                GetComponent<PlayerMovement>().enabled = true;
+                specialCooldown = Time.time + 25f;
+            }
 
-                if (PlayerStats.currentSpecial == "HermesCaduceus")
-                {
-                    PlayerStats.CaduceusActive = false;
-                    animator.SetBool("CaduceusActive", false);
-                    GetComponent<PlayerMovement>().enabled = true;
-                    specialCooldown = Time.time + 20f;
-                }
+            if (PlayerStats.currentSpecial == "HermesCaduceus")
+            {
+                PlayerStats.CaduceusActive = false;
+                animator.SetBool("CaduceusActive", false);
+                GetComponent<PlayerMovement>().enabled = true;
+                specialCooldown = Time.time + 20f;
+            }
 
-                if (PlayerStats.currentSpecial == "Sudoken")
-                {
-                    PlayerStats.CaduceusActive = false;
-                    specialCooldown = Time.time + 10f;
-                }
+            if (PlayerStats.currentSpecial == "Sudoken")
+            {
+                PlayerStats.CaduceusActive = false;
+                specialCooldown = Time.time + 10f;
+            }
 
-                if (PlayerStats.currentSpecial == "MedusaHead")
-                {
-                    PlayerStats.MedusaActive = false;
-                    animator.SetBool("MedusaActive", false);
-                    GetComponent<PlayerMovement>().enabled = true;
-                    specialCooldown = Time.time + 30f;
-                }
+            if (PlayerStats.currentSpecial == "MedusaHead")
+            {
+                PlayerStats.MedusaActive = false;
+                animator.SetBool("MedusaActive", false);
+                GetComponent<PlayerMovement>().enabled = true;
+                specialCooldown = Time.time + 30f;
+            }
 
-                if (PlayerStats.currentSpecial == "MaskActive")
-                {
-                    PlayerStats.FireActive = false;
-                    animator.SetBool("HornActive", false);
-                    GetComponent<PlayerMovement>().enabled = true;
-                    specialCooldown = Time.time + 25f;
-                }
+            if (PlayerStats.currentSpecial == "MaskActive")
+            {
+                PlayerStats.MaskActive = false;
+                animator.SetBool("HornActive", false);
+                GetComponent<PlayerMovement>().enabled = true;
+                specialCooldown = Time.time + 25f;
             }
         }
+        
     }
 
         public void Attack()
