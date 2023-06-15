@@ -172,11 +172,12 @@ public class PlayerCombat : MonoBehaviour
                 }
             }
                 
-
+            if (Time.time >= specialCooldown)
+            {
                 if (PlayerStats.currentSpecial == "TheMask")
                 {
                     PlayerStats.MaskActive = true;
-                    animator.SetBool("MaskActive", true);
+                    animator.SetBool("HornActive", true);
                     GetComponent<PlayerMovement>().enabled = false;
                     rb.velocity = new Vector2(0, rb.velocity.y); // Sets the Player Velocity to 0
 
@@ -185,9 +186,11 @@ public class PlayerCombat : MonoBehaviour
                     // Damages the Enemey
                     foreach (Collider2D enemy in SpecialHitEnemies)
                     {
-                        enemy.GetComponent<enemy>().TakeDamage(PlayerStats.FiresOfHellDamage);
+                        enemy.GetComponent<enemy>().TakeDamage(PlayerStats.HornDamage);
                     }
                 }
+            }
+                
 
                 if (PlayerStats.currentSpecial == "")
                 {
@@ -234,6 +237,14 @@ public class PlayerCombat : MonoBehaviour
                     animator.SetBool("MedusaActive", false);
                     GetComponent<PlayerMovement>().enabled = true;
                     specialCooldown = Time.time + 30f;
+                }
+
+                if (PlayerStats.currentSpecial == "MaskActive")
+                {
+                    PlayerStats.FireActive = false;
+                    animator.SetBool("HornActive", false);
+                    GetComponent<PlayerMovement>().enabled = true;
+                    specialCooldown = Time.time + 25f;
                 }
             }
         }

@@ -23,7 +23,7 @@ public class PlayerStats : MonoBehaviour
     public static bool MedusaActive;
         public static float freezeTime = 5f;
     public static bool MaskActive;
-        public static int HornDamage = 75;
+        public static int HornDamage = 100;
 
 
 
