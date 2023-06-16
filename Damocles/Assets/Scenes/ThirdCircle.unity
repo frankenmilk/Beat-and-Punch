@@ -90469,7 +90469,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transition: {fileID: 1406875262}
-  player: {fileID: 0}
+  player: {fileID: 1252089252}
   transitionTime: 1
 --- !u!4 &1923031131
 Transform:

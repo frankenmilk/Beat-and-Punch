@@ -22,18 +22,18 @@ public class LevelLoader : MonoBehaviour
         }
         if(SceneManager.GetActiveScene().buildIndex == 1)
         {
-            StartCoroutine(Timer(100));
+            StartCoroutine(Timer(5));
         }
         if(SceneManager.GetActiveScene().buildIndex == 2 && 478 < player.transform.position.x
             && 43.78 < player.transform.position.y)
         {
             LoadNextLevel();
         }
-        if(SceneManager.GetActiveScene().buildIndex == 3 && /*add boss trigger*/)
+        if(SceneManager.GetActiveScene().buildIndex == 3 /*&& /*add boss trigger*/)
         {
             LoadNextLevel();
         }
-        if(SceneManager.GetActiveScene().buildIndex == 4 && /*another boss trigger*/)
+        if(SceneManager.GetActiveScene().buildIndex == 4 /*&& /*another boss trigger*/)
         {
             LoadNextLevel();
         }
@@ -41,15 +41,15 @@ public class LevelLoader : MonoBehaviour
         {
             LoadNextLevel();
         }
-        if(SceneManager.GetActiveScene().buildIndex == 6 && /*boss trigger*/)
+        if(SceneManager.GetActiveScene().buildIndex == 6 /*&& /*boss trigger*/)
         {
             LoadNextLevel();
         }
-        if(SceneManager.GetActiveScene().buildIndex == 7 && /*find player location*/)
+        if(SceneManager.GetActiveScene().buildIndex == 7 /*&& /*find player location*/)
         {
             LoadNextLevel();
         }
-        if(SceneManager.GetActiveScene().buildIndex == 8 && /*find player location*/)
+        if(SceneManager.GetActiveScene().buildIndex == 8 /*&& /*find player location*/)
         {
             LoadNextLevel();
         }
@@ -71,7 +71,9 @@ public class LevelLoader : MonoBehaviour
 
     IEnumerator Timer (int time)
     {
+        Debug.Log("hey");
         yield return new WaitForSeconds(time);
+        Debug.Log("working");
         LoadNextLevel();
     }
 }
