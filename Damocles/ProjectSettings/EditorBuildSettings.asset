@@ -21,7 +21,7 @@ EditorBuildSettings:
     path: Assets/Scenes/SecondCircle.unity
     guid: 83094e32535270348aaa43da92fa2215
   - enabled: 0
-    path: Assets/Scenes/BossSecondCircle.unity
+    path: Assets/Scenes/EightCircle.unity
     guid: c2fd0ef71721bc842b4f6482d23fe604
   - enabled: 1
     path: Assets/Scenes/ThirdCircle.unity

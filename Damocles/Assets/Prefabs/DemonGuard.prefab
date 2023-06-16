@@ -97,8 +97,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slowed: 0
+  frozen: 0
   slowedSpeed: 1
-  unslowedSpeed: 3
+  frozenSpeed: 0
+  normalSpeed: 4
   enemyJump: 16
 --- !u!114 &7652487512016489020
 MonoBehaviour:
