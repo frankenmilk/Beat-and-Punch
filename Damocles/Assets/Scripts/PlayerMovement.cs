@@ -30,6 +30,14 @@ public class PlayerMovement : MonoBehaviour
     public GameObject Heart_2;
     public GameObject Heart_3;
 
+    public GameObject TheMocle;
+    public GameObject HammerSpace;
+    public GameObject MetalPipe;
+    public GameObject GlassSword;
+    public GameObject HadesBident;
+    public GameObject SwordOfJustice;
+    public GameObject RiddlerCane;
+
     // For collision
     [SerializeField] private Rigidbody2D rb;
 
@@ -96,6 +104,70 @@ public class PlayerMovement : MonoBehaviour
         if (!isWallJumping)
         {
             Flip();
+        }
+        //Weapon Displayment
+        if (PlayerStats.currentWeapon == "TheMocle")
+        {
+            GameObject.Destroy(HadesBident);
+            GameObject.Destroy(HammerSpace);
+            GameObject.Destroy(RiddlerCane);
+            GameObject.Destroy(GlassSword);
+            GameObject.Destroy(SwordOfJustice);
+            GameObject.Destroy(MetalPipe);
+        }
+        if (PlayerStats.currentWeapon == "HadesBident")
+        {
+            GameObject.Destroy(TheMocle);
+            GameObject.Destroy(HammerSpace);
+            GameObject.Destroy(RiddlerCane);
+            GameObject.Destroy(GlassSword);
+            GameObject.Destroy(SwordOfJustice);
+            GameObject.Destroy(MetalPipe);
+        }
+        if (PlayerStats.currentWeapon == " HammerSpace")
+        {
+            GameObject.Destroy(HadesBident);
+            GameObject.Destroy(TheMocle);
+            GameObject.Destroy(RiddlerCane);
+            GameObject.Destroy(GlassSword);
+            GameObject.Destroy(SwordOfJustice);
+            GameObject.Destroy(MetalPipe);
+        }
+        if (PlayerStats.currentWeapon == "RiddlerCane")
+        {
+            GameObject.Destroy(HadesBident);
+            GameObject.Destroy(HammerSpace);
+            GameObject.Destroy(TheMocle);
+            GameObject.Destroy(GlassSword);
+            GameObject.Destroy(SwordOfJustice);
+            GameObject.Destroy(MetalPipe);
+        }
+        if (PlayerStats.currentWeapon == "GlassSword")
+        {
+            GameObject.Destroy(HadesBident);
+            GameObject.Destroy(HammerSpace);
+            GameObject.Destroy(RiddlerCane);
+            GameObject.Destroy(TheMocle);
+            GameObject.Destroy(SwordOfJustice);
+            GameObject.Destroy(MetalPipe);
+        }
+        if (PlayerStats.currentWeapon == "SwordOfJustic")
+        {
+            GameObject.Destroy(HadesBident);
+            GameObject.Destroy(HammerSpace);
+            GameObject.Destroy(RiddlerCane);
+            GameObject.Destroy(GlassSword);
+            GameObject.Destroy(TheMocle);
+            GameObject.Destroy(MetalPipe);
+        }
+        if (PlayerStats.currentWeapon == "MetalPipe")
+        {
+            GameObject.Destroy(HadesBident);
+            GameObject.Destroy(HammerSpace);
+            GameObject.Destroy(RiddlerCane);
+            GameObject.Destroy(GlassSword);
+            GameObject.Destroy(SwordOfJustice);
+            GameObject.Destroy(TheMocle);
         }
     }
 

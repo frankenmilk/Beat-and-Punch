@@ -245,7 +245,7 @@ public class PlayerCombat : MonoBehaviour
                 specialCooldown = Time.time + 25f;
             }
         }
-        
+
     }
 
         public void Attack()

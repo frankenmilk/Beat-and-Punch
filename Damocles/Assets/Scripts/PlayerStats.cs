@@ -6,7 +6,7 @@ public class PlayerStats : MonoBehaviour
 {
     public static int playerHealth = 100;
 
-    public static string currentWeapon;
+    public static string currentWeapon = "HammerSpace";
 
     public static string currentRangedWeapon;
 
