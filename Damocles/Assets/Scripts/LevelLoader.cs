@@ -29,30 +29,20 @@ public class LevelLoader : MonoBehaviour
         {
             LoadNextLevel();
         }
-        if(SceneManager.GetActiveScene().buildIndex == 3 /*&& /*add boss trigger*/)
+        if(SceneManager.GetActiveScene().buildIndex == 3 && 338 < player.transform.position.x)
         {
             LoadNextLevel();
         }
-        if(SceneManager.GetActiveScene().buildIndex == 4 /*&& /*another boss trigger*/)
+        if(SceneManager.GetActiveScene().buildIndex == 4 && 423 < player.transform.position.x)
         {
             LoadNextLevel();
         }
-        if(SceneManager.GetActiveScene().buildIndex == 5 && 423 < player.transform.position.x)
+        if(SceneManager.GetActiveScene().buildIndex == 5 && 132 < player.transform.position.y &&
+            220 < player.transform.position.x)
         {
             LoadNextLevel();
         }
-        if(SceneManager.GetActiveScene().buildIndex == 6 /*&& /*boss trigger*/)
-        {
-            LoadNextLevel();
-        }
-        if(SceneManager.GetActiveScene().buildIndex == 7 /*&& /*find player location*/)
-        {
-            LoadNextLevel();
-        }
-        if(SceneManager.GetActiveScene().buildIndex == 8 /*&& /*find player location*/)
-        {
-            LoadNextLevel();
-        }
+        
     }
 
     public void LoadNextLevel()

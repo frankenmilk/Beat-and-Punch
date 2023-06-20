@@ -25,6 +25,11 @@ public class PlayerMovement : MonoBehaviour
     private float wallJumpingDuration = 0.4f;
     private Vector2 wallJumpingPower = new Vector2(8f, 16f);
 
+    public GameObject Heart_1;
+    public GameObject Heart;
+    public GameObject Heart_2;
+    public GameObject Heart_3;
+
     // For collision
     [SerializeField] private Rigidbody2D rb;
 
@@ -254,11 +259,25 @@ public class PlayerMovement : MonoBehaviour
 
         Debug.Log("Player Current Health is: " + PlayerStats.playerHealth);
 
+        if (PlayerStats.playerHealth == 75)
+        {
+            GameObject.Destroy(Heart_3);
+        }
+        if (PlayerStats.playerHealth == 50)
+        {
+            GameObject.Destroy(Heart_2);
+        }
+        if (PlayerStats.playerHealth == 25)
+        {
+            GameObject.Destroy(Heart_1);
+        }
+
         
 
         // Plays death Animation if current health reaches or goes below 0
         if (PlayerStats.playerHealth <= 0)
         {
+            GameObject.Destroy(Heart);
             Die();
         }
 
