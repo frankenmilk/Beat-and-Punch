@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -37,6 +38,15 @@ public class PlayerMovement : MonoBehaviour
     public GameObject HadesBident;
     public GameObject SwordOfJustice;
     public GameObject RiddlerCane;
+
+    public GameObject Key;
+    public GameObject Key2;
+    public GameObject Key3;
+    public GameObject Player;
+    public GameObject lock1;
+    public GameObject lock2;
+    public GameObject lock3;
+    public GameObject Gate;
 
     // For collision
     [SerializeField] private Rigidbody2D rb;
@@ -103,6 +113,11 @@ public class PlayerMovement : MonoBehaviour
         if (isGrounded == true)
         {
             TakeDamage(die);
+        }
+
+        if (SceneManager.GetActiveScene().buildIndex == 3)
+        {
+            KeyGrabber();
         }
         
         WallSlide();
@@ -214,6 +229,29 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.SetBool("IsWallSliding", false);
             isWallSliding = false;
+        }
+    }
+
+    public void KeyGrabber()
+    {
+        if (30 < Player.transform.position.y && 97 < Player.transform.position.x && 101 > Player.transform.position.x && 33 > Player.transform.position.y)
+        {
+            GameObject.Destroy(Key);
+            GameObject.Destroy(lock1);
+        }
+        if (-6 < Player.transform.position.y && 126 < Player.transform.position.x && 130 > Player.transform.position.x && -4 > Player.transform.position.y)
+        {
+            GameObject.Destroy(Key2);
+            GameObject.Destroy(lock2);
+        }
+        if (-50 < Player.transform.position.y && 130 < Player.transform.position.x && 134 > Player.transform.position.x && -48 > Player.transform.position.y)
+        {
+            GameObject.Destroy(Key3);
+            GameObject.Destroy(lock3);
+        }
+        if (lock1 == null && lock2 == null && lock3 == null)
+        {
+            GameObject.Destroy(Gate);
         }
     }
 

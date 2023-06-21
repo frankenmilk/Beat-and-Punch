@@ -5,6 +5,15 @@ using UnityEngine;
 public class CardPicker : MonoBehaviour
 {
     public static int selectedCard;
+
+    public GameObject TheMocle;
+    public GameObject HammerSpace;
+    public GameObject MetalPipe;
+    public GameObject GlassSword;
+    public GameObject HadesBident;
+    public GameObject SwordOfJustice;
+    public GameObject RiddlerCane;
+    
     private int timesWithoutPicked;
     public void ChooseCard()
     {
