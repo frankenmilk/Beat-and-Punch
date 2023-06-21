@@ -55,6 +55,9 @@ public class PlayerMovement : MonoBehaviour
     int damage50 = 50;
     //int damage50 = 50;
 
+    public int die = 100;
+    public bool isGrounded;
+
     [SerializeField] float knockBackForce;
     [SerializeField] float knockBackForceUp;
 
@@ -96,6 +99,10 @@ public class PlayerMovement : MonoBehaviour
             {
                 rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
             }
+        }
+        if (isGrounded == true)
+        {
+            TakeDamage(die);
         }
         
         WallSlide();
@@ -287,8 +294,7 @@ public class PlayerMovement : MonoBehaviour
         else if (whichEnemy == "50")
         {
             DamageSources = GameObject.FindGameObjectsWithTag("enemy50");
-        }
-            
+        }    
                 
         
         float closestDistance = Mathf.Infinity;
@@ -311,7 +317,7 @@ public class PlayerMovement : MonoBehaviour
         return currentClosestDamageSource;
     }
 
-    void TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
         canMove = false;
         timeTime = Time.time;
@@ -362,6 +368,21 @@ public class PlayerMovement : MonoBehaviour
         GetComponent<Collider2D>().enabled = false;
 
 
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer == 12 && !isGrounded)
+        {
+            isGrounded = true;
+        }
+    }
+    void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.layer == 12 && isGrounded)
+        {
+            isGrounded = false;
+        }
     }
 
 

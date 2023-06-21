@@ -9,6 +9,8 @@ TagManager:
   - Invis Wall
   - enemy25
   - enemy50
+  - EnemyJumpPad
+  - Lava
   layers:
   - Default
   - TransparentFX
@@ -22,7 +24,7 @@ TagManager:
   - foreground tree
   - background tree
   - enemy
-  - 
+  - Lava
   - 
   - 
   - 
