@@ -9,12 +9,19 @@ public class Parallax : MonoBehaviour
     public GameObject cam;
     public float parallaxEffect;
 
+    private Transform cameraTransform;
+
+    private float textureUnitSize;
+
     // Start is called before the first frame update
     void Start()
     {
+        cameraTransform = Camera.main.transform;
         startpos = transform.position.x;
         ypos = transform.position.y;
-        length = GetComponent<SpriteRenderer>().bounds.size.x;
+        Sprite sprite = GetComponent<SpriteRenderer>().sprite;
+        Texture2D texture = sprite.texture;
+        textureUnitSize = texture.width / sprite.pixelsPerUnit;
     }
 
     // Update is called once per frame
@@ -25,13 +32,10 @@ public class Parallax : MonoBehaviour
         float ydist = (cam.transform.position.y * parallaxEffect);
 
         transform.position = new Vector3(startpos + dist, ypos + ydist, transform.position.z);
-        if (temp > startpos + length)
+        if (Mathf.Abs(cameraTransform.position.x - transform.position.x) >= textureUnitSize)
         {
-            startpos += length;
-        }
-        else if (temp < startpos - length)
-        {
-            startpos -= length;
+            float offSetPositionX = (cameraTransform.position.x - transform.position.x) % textureUnitSize;
+            transform.position = new Vector3(cameraTransform.position.x + offSetPositionX, transform.position.y);
         }
     }
 

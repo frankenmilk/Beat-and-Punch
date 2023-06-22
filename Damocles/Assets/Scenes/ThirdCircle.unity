@@ -16729,7 +16729,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7652487512016489021, guid: f1013a7e1625ee1429e88383607f9f53, type: 3}
       propertyPath: normalSpeed
-      value: 30
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
@@ -100499,6 +100499,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   transition: {fileID: 1406875262}
   player: {fileID: 1252089252}
+  set1: {fileID: 0}
+  set2: {fileID: 0}
+  Vp: {fileID: 0}
   transitionTime: 1
 --- !u!4 &1923031131
 Transform:
