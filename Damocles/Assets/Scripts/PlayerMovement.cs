@@ -75,6 +75,7 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Update()
     {
+
         if (Time.time >= timeTime + 1f)
         {
             canMove = true;
@@ -109,10 +110,6 @@ public class PlayerMovement : MonoBehaviour
             {
                 rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
             }
-        }
-        if (isGrounded == true)
-        {
-            TakeDamage(die);
         }
 
         if (SceneManager.GetActiveScene().buildIndex == 3)
@@ -303,6 +300,7 @@ public class PlayerMovement : MonoBehaviour
     // Player Damage area
     private void OnCollisionEnter2D(Collision2D col)
     {
+
         if (col.gameObject.tag == "enemy25" && PlayerStats.AegisActive == false)
         {
             TakeDamage(damage25);
@@ -310,6 +308,11 @@ public class PlayerMovement : MonoBehaviour
         else if (col.gameObject.tag == "enemy50" && PlayerStats.AegisActive == false)
         {
             TakeDamage(damage50);
+        }
+
+        if (col.gameObject.tag == "Lava")
+        {
+            Die();
         }
     }
 
@@ -388,8 +391,6 @@ public class PlayerMovement : MonoBehaviour
             GameObject.Destroy(Heart_1);
         }
 
-        
-
         // Plays death Animation if current health reaches or goes below 0
         if (PlayerStats.playerHealth <= 0)
         {
@@ -407,21 +408,5 @@ public class PlayerMovement : MonoBehaviour
 
 
     }
-
-    void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.layer == 12 && !isGrounded)
-        {
-            isGrounded = true;
-        }
-    }
-    void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.layer == 12 && isGrounded)
-        {
-            isGrounded = false;
-        }
-    }
-
-
+    
 }

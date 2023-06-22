@@ -2,12 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Video;
 
 public class LevelLoader : MonoBehaviour
 {
     public Animator transition;
 
     public GameObject player;
+
+    public GameObject set1;
+    public GameObject set2;
+
+    public VideoPlayer Vp;
 
     public float transitionTime = 1f;
 
@@ -22,7 +28,8 @@ public class LevelLoader : MonoBehaviour
         }
         if(SceneManager.GetActiveScene().buildIndex == 1)
         {
-            StartCoroutine(Timer(5));
+            StartCoroutine(Cutscene1Timer(12));
+            StartCoroutine(ObjectDelTimer(7.5f));
         }
         if(SceneManager.GetActiveScene().buildIndex == 2 && 478 < player.transform.position.x
             && 43.78 < player.transform.position.y)
@@ -59,11 +66,21 @@ public class LevelLoader : MonoBehaviour
         SceneManager.LoadScene(levelIndex);
     }
 
-    IEnumerator Timer (int time)
+    IEnumerator Cutscene1Timer (int time)
     {
-        Debug.Log("hey");
         yield return new WaitForSeconds(time);
-        Debug.Log("working");
         LoadNextLevel();
     }
+    
+    IEnumerator ObjectDelTimer (float delTime)
+    {
+        Vp.Prepare();
+        yield return new WaitForSeconds(delTime);
+        Destroy(set1);
+        Destroy(set2);
+        yield return new WaitForSeconds(0.5f);
+        Vp.Play();
+    }
+    
+
 }
